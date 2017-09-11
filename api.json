@@ -1,0 +1,682 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "The Weather Company Data  APIs are served from our Enterprise Data Platform built upon the latest, most robust and globally distributed cloud technologies leveraging the core competence of our weather systems and next-generation globally distributed, highly available, low latency platforms. The Enterprise Data Platform has been architected from the beginning with extreme scale and performance as key factors of success and is automatically scales to deliver tens of Billions average daily requests with extremely low latency.",
+    "version": "HackZurich",
+    "title": "The Weather Company Data APIs",
+    "contact": {
+      "email": "michael.wellner@de.ibm.com"
+    }
+  },
+  "host": "api.weather.com",
+  "tags": [
+    {
+      "name": "Core",
+      "description": "Weather Core APIs",
+      "externalDocs": {
+        "description": "Get more details",
+        "url": "https://goo.gl/bc2yDb"
+      }
+    },
+    {
+      "name": "Location Services",
+      "description": "APIs for searching locations, resolving geocodes etc.",
+      "externalDocs": {
+        "description": "Get more details",
+        "url": "https://goo.gl/bc2yDb"
+      }
+    },
+    {
+      "name": "Weather Imagery",
+      "description": "Weather Imagery APIs",
+      "externalDocs": {
+        "description": "Get more details",
+        "url": "https://goo.gl/LXP7HM"
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "security": [
+    {
+      "APIKeyQueryParam": []
+    }
+  ],
+  "paths": {
+    "/v1/country/{countryCode}/alerts.json": {
+      "get": {
+        "tags": [
+          "Core"
+        ],
+        "summary": "Weather Alert Headlines",
+        "description": "The Weather Alert Headlines API provides weather watches, warnings, statements and advisories issued by the NWS (National Weather Service), Environment Canada and MeteoAlarm. These weather alerts can provide crucial life-saving information. Weather alerts can be complicated and do not always follow consistent standards, format and rules. The Weather Channel (TWC) strives to ensure that the information is consistent from all of the different sources but the content is subject to change whenever there is an update from the authoritative source. <br /><br /> The Weather Alert Headline API returns active weather alert headlines related to Severe Thunderstorms, Tornadoes, Earthquakes, Floods, etc . This API also returns non-weather alerts such as Child Abduction Emergency and Law Enforcement Warnings.  The Alert Headlines API also provides a key value found in the <detailKey> attribute to access the alert details in the Alert Details API. <br /><br /> **Detailed Documentation**:  https://goo.gl/C6Q6dC",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/countryCode"
+          },
+          {
+            "$ref": "#/parameters/languageCodeQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Please see documentation for details: https://goo.gl/C6Q6dC"
+          }
+        }
+      }
+    },
+    "/v1/alert/{key}/details.json": {
+      "get": {
+        "tags": [
+          "Core"
+        ],
+        "summary": "Weather Alert Details",
+        "description": "The Weather Alert Details API provides weather watches, warnings, statements and advisories issued by the NWS (National Weather Service), Environment Canada and MeteoAlarm. These weather alerts can provide crucial life-saving information. Weather alerts can be complicated and do not always follow consistent standards, format and rules. The Weather Channel (TWC) strives to ensure that the information is consistent from all of the different sources but the content is subject to change whenever there is an update from the authoritative source. <br /><br /> The Weather Alert Headlines API returns active weather alert headlines related to Severe Thunderstorms, Tornadoes, Earthquakes, Floods, etc . This API also returns non-weather alerts such as Child Abduction Emergency and Law Enforcement Warnings.  The Alert Headlines API also provides a key value found in the <detailKey> attribute to access the alert details in the Alert Details API. <br /> Your application should first call the Weather Alert Headlines API and use the value found in the <detailKey> attribute to request the detailed information found in the Weather Alert Details API.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "key",
+            "type": "string",
+            "required": true,
+            "description": "The key of the Alert - Retrieved via the Weather Alert Headlines API"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Please see documentation for details: https://goo.gl/wkZXZF"
+          }
+        }
+      }
+    },
+    "/v1/geocode/{latitude}/{longitude}/forecast/daily/{days}day.json": {
+      "get": {
+        "tags": [
+          "Core"
+        ],
+        "summary": "Daily Forecast (3-Day, 5-Day, 7-Day, 10-Day)",
+        "description": "The Daily Forecast  API is sourced from the The Weather Company Forecast system.  This TWC API returns weather forecasts starting current day. Your content licensing agreement with TWC determines the number of days returned in the API response and is constrained by the API Key that is provided to your company.  Please refer to the Data Elements section later in this document for more details.  <br /><br /> **Forecast Composition**\nThe TWC daily forecast product can contain multiple days of daily forecasts for each location. Each day of a forecast can contain up to (3) \"temporal segments\" meaning three separate forecasts. For any given forecast day we offer day, night, and a 24-hour forecast (daily summary). Implementing our forecasts requires your applications to perform basic processing in order to properly ingest the forecast data feeds. <br /><br/> **Forecast Implementation**\nThe data values in this API are correctly populated into Day, Night, or 24-hour temporal segments. These segments are separate objects in the response. <br /><br /> For more details please visit Documentation - TODO.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/latitudePath"
+          },
+          {
+            "$ref": "#/parameters/longitudePath"
+          },
+          {
+            "$ref": "#/parameters/daysPath"
+          },
+          {
+            "$ref": "#/parameters/unitsQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Please see documentation for details: https://goo.gl/H3Ijuj"
+          }
+        }
+      }
+    },
+    "/v1/geocode/{latitude}/{longitude}/forecast/intraday/{days}day.json": {
+      "get": {
+        "tags": [
+          "Core"
+        ],
+        "summary": "Intraday Forecast (3-Day, 5-Day, 7-Day, 10-Day)",
+        "description": "The Intraday Forecast  API is sourced from the The Weather Company Forecast system. This TWC API returns weather forecasts in 6-hour periods starting current day. The 6-hour periods are Morning, Afternoon, Evening, and Overnight. Your content licensing agreement with TWC determines the number of days returned in the API response and is constrained by the API Key that is provided to your company.  <br /><br /> **Understanding Intraday Forecasts**\nThe Intraday Forecast product breaks down the days forecasts into (four) 6-hour segments for each of the included days. <br /><br /> For more details please visit Documentation - TODO.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/latitudePath"
+          },
+          {
+            "$ref": "#/parameters/longitudePath"
+          },
+          {
+            "$ref": "#/parameters/daysPath"
+          },
+          {
+            "$ref": "#/parameters/unitsQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Please see documentation for details: https://goo.gl/ZzU2cb"
+          }
+        }
+      }
+    },
+    "/v1/geocode/{latitude}/{longitude}/forecast/hourly/48hour.json": {
+      "get": {
+        "tags": [
+          "Core"
+        ],
+        "summary": "2 Day Hourly Forecast",
+        "description": "The Hourly Forecast  API is sourced from the The Weather Company Forecast system. This TWC API returns weather forecasts starting current day. Your content licensing agreement with TWC determines the number of days returned in the API response and is constrained by the API Key that is provided to your company.  Please refer to the Data Elements section later in this document for more details.  <br /><br /> For more details please visit Documentation - https://goo.gl/yCt3Ju.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/latitudePath"
+          },
+          {
+            "$ref": "#/parameters/longitudePath"
+          },
+          {
+            "$ref": "#/parameters/unitsQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Please see documentation for details: https://goo.gl/yCt3Ju"
+          }
+        }
+      }
+    },
+    "/v1/geocode/{latitude}/{longitude}/almanac/daily.json": {
+      "get": {
+        "tags": [
+          "Core"
+        ],
+        "summary": "Almanac Daily",
+        "description": "The Almanac product provides the record high, record low, and average temperatures for a given location. The almanac information for this API is sourced from National Weather Service observations stations from a time period spanning 10 to 30 years or more. The information is gathered and provided by the National Climatic Data Center (NCDC). <br /><br /> For more details please visit Documentation - https://goo.gl/1zKfVs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/latitudePath"
+          },
+          {
+            "$ref": "#/parameters/longitudePath"
+          },
+          {
+            "$ref": "#/parameters/unitsQuery"
+          },
+          {
+            "$ref": "#/parameters/startQuery"
+          },
+          {
+            "$ref": "#/parameters/endQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Please see documentation for details: https://goo.gl/1zKfVs"
+          }
+        }
+      }
+    },
+    "/v1/geocode/{latitude}/{longitude}/almanac/monthly.json": {
+      "get": {
+        "tags": [
+          "Core"
+        ],
+        "summary": "Almanac Monthly",
+        "description": "The Almanac product provides the record high, record low, and average temperatures for a given location. The almanac information for this API is sourced from National Weather Service observations stations from a time period spanning 10 to 30 years or more. The information is gathered and provided by the National Climatic Data Center (NCDC). <br /><br /> For more details please visit Documentation - https://goo.gl/wGMn6w.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/latitudePath"
+          },
+          {
+            "$ref": "#/parameters/longitudePath"
+          },
+          {
+            "$ref": "#/parameters/unitsQuery"
+          },
+          {
+            "$ref": "#/parameters/startMonthQuery"
+          },
+          {
+            "$ref": "#/parameters/endMonthQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Please see documentation for details: https://goo.gl/wGMn6w"
+          }
+        }
+      }
+    },
+    "/v1/geocode/{latitude}/{longitude}/observations.json": {
+      "get": {
+        "tags": [
+          "Core"
+        ],
+        "summary": "Site-Based Current Conditions",
+        "description": "Current Conditions are sourced from both physical site-based observation stations and synthetic weather observations produced by the TWC Currents system. This API returns the  latest weather observation for the location supplied to include current temperatures, winds, pressure and other observed weather information. Weather observations from physical devices deployed worldwide (weather data collected from METAR, SYNOP, BUOY, CMAN devices). <br /><br /> **Current Condition & Time-Series Data**\nAccess to retained site-based and synthetic data will be distributed on-demand in Current Conditions and Time Series data feeds.   These recent observations are retained in the primary TWC database up to 48 hours ( 2 days ) on specific reporting stations and nn hours of observations per station.  Observations per station within a 24 hour period varies due to station operation requirements (i.e. modified operating hours, number of observations recorded per hour, maintenance issues, etc).  <br /><br /> The recent observations data will be continuously updated and replaced with a first-in / first-out methodology, (rotating data with newest observation and moving the oldest observations to the archive storage) based on date/time stamping of the observations. The amount of data retained and available from any given station may be more than a single observation or more than 24 individual observation reports for any given station id. The number of observations is determined by the type of observation it is, i.e. NWS, etc. \n<br /><br /> For more details please visit Documentation - https://goo.gl/vycisA.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/latitudePath"
+          },
+          {
+            "$ref": "#/parameters/longitudePath"
+          },
+          {
+            "$ref": "#/parameters/unitsQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Please see documentation for details: https://goo.gl/vycisA"
+          }
+        }
+      }
+    },
+    "/v1/geocode/{latitude}/{longitude}/observations/timeseries.json": {
+      "get": {
+        "tags": [
+          "Core"
+        ],
+        "summary": "Time-Series Observations (Current & 24 Hours Past)",
+        "description": "The Time-Series Observations returns the previous 24 hour period from the previous day up to the last reported current condition today. Current Conditions are sourced from both physical site-based observation stations and synthetic weather observations produced by the TWC Currents system. This API returns the  latest weather observation for the location supplied to include current temperatures, winds, pressure and other observed weather information. Weather observations from physical devices deployed worldwide (weather data collected from METAR, SYNOP, BUOY, CMAN devices), and the synthetic weather observations (TECCI) produced by the TWC Currents system. <br /><br /> **Current Condition & Time-Series Data**\nAccess to retained site-based and synthetic data will be distributed on-demand in Current Conditions and Time Series data feeds. Observations per station within a 24 hour period varies due to station operation requirements (i.e. modified operating hours, number of observations recorded per hour, maintenance issues, etc).  <br /><br /> The recent observations data will be continuously updated and replaced with a first-in / first-out methodology, (rotating data with newest observation and moving the oldest observations to the archive storage) based on date/time stamping of the observations. The amount of data retained and available from any given station may be more than a single observation or more than 24 individual observation reports for any given station id. The number of observations is determined by the type of observation reported i.e. NWS, etc.  <br /><br /> It is not to be assumed that data returned will be equal to the hours of past observations requested.  Example: 3 hours of past observations may not return just 3 observations. <br /><br /> Some reporting stations report observations more than once an hour. <br /><br /> For more details please visit Documentation - https://goo.gl/1RWzPl.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/latitudePath"
+          },
+          {
+            "$ref": "#/parameters/longitudePath"
+          },
+          {
+            "$ref": "#/parameters/unitsQuery"
+          },
+          {
+            "$ref": "#/parameters/hoursQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Please see documentation for details:https://goo.gl/1RWzPl"
+          }
+        }
+      }
+    },
+    "/v3/location/search": {
+      "get": {
+        "tags": [
+          "Core",
+          "Location Services"
+        ],
+        "summary": "Location Search",
+        "description": "The Location Service API provides the ability to lookup a location name or geocode (latitude and longitude) to retrieve a set of locations matching the request. The Location Service supports search by; City Name, Address, Geocode (Latitude and Longitude), Postal Code, IATA Code, ICAO Code. <br /><br /> For more details please visit Documentation - https://goo.gl/l18rri.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/queryQuery"
+          },
+          {
+            "$ref": "#/parameters/locationTypeQuery"
+          },
+          {
+            "$ref": "#/parameters/adminDistrictQuery"
+          },
+          {
+            "$ref": "#/parameters/languageCodeQuery"
+          },
+          {
+            "$ref": "#/parameters/formatQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Please see documentation for details: https://goo.gl/l18rri"
+          }
+        }
+      }
+    },
+    "/v3/location/point": {
+      "get": {
+        "tags": [
+          "Core",
+          "Location Services"
+        ],
+        "summary": "Location Search",
+        "description": "The Location Service API provides the ability to lookup a location name or geocode (latitude and longitude) to retrieve a set of locations matching the request. The Location Service supports search by; City Name, Address, Geocode (Latitude and Longitude), Postal Code, IATA Code, ICAO Code. <br /><br /> For more details please visit Documentation - https://goo.gl/l18rri.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/geocodeQuery"
+          },
+          {
+            "$ref": "#/parameters/postalCodeQuery"
+          },
+          {
+            "$ref": "#/parameters/iataCodeQuery"
+          },
+          {
+            "$ref": "#/parameters/icaoCodeQuery"
+          },
+          {
+            "$ref": "#/parameters/languageCodeQuery"
+          },
+          {
+            "$ref": "#/parameters/formatQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Please see documentation for details: https://goo.gl/l18rri"
+          }
+        }
+      }
+    },
+    "/v3/TileServer/series/productSet/PPAcore": {
+      "get": {
+        "tags": [
+          "Core",
+          "Weather Imagery"
+        ],
+        "summary": "Inventory Series List",
+        "description": "The Image Tile Server API features a comprehensive set of tile-based products utilizing data from including radar, satellite, current conditions, and forecast information based on complex algorithms developed from TWC observation systems. It provides the ability to request tiles of varying resolution. The Image Tile Server product provides access to our most popular mapping layers pre-rendered with appropriate palettes, ready to be applied to your base map. Layers are served as precut 256x256 png image files for interactive maps and other data visualization, addressed according to a XYZ tile address schema.                      <br /><br /> For more details please visit Documentation - https://goo.gl/LXP7HM.",
+        "responses": {
+          "200": {
+            "description": "Please see documentation for details: https://goo.gl/LXP7HM"
+          }
+        }
+      }
+    },
+    "/v3/TileServer/tile/{layer}": {
+      "get": {
+        "tags": [
+          "Core",
+          "Weather Imagery"
+        ],
+        "summary": "Inventory Series List",
+        "description": "The Image Tile Server API features a comprehensive set of tile-based products utilizing data from including radar, satellite, current conditions, and forecast information based on complex algorithms developed from TWC observation systems. It provides the ability to request tiles of varying resolution. The Image Tile Server product provides access to our most popular mapping layers pre-rendered with appropriate palettes, ready to be applied to your base map. Layers are served as precut 256x256 png image files for interactive maps and other data visualization, addressed according to a XYZ tile address schema.                      <br /><br /> For more details please visit Documentation - https://goo.gl/LXP7HM.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/layerPath"
+          },
+          {
+            "$ref": "#/parameters/tsQuery"
+          },
+          {
+            "$ref": "#/parameters/ftsQuery"
+          },
+          {
+            "$ref": "#/parameters/xyzQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Please see documentation for details: https://goo.gl/LXP7HM"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "APIKeyQueryParam": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "apiKey"
+    }
+  },
+  "parameters": {
+    "adminDistrictQuery": {
+      "name": "adminDistrictCode",
+      "default": "GA",
+      "in": "query",
+      "description": "The admin district of the location",
+      "type": "string",
+      "required": false
+    },
+    "countryCode": {
+      "name": "countryCode",
+      "in": "path",
+      "description": "A valid country code; Please keep in mind that not every country code is covered by all APIs. <br /><br />",
+      "type": "string",
+      "enum": [
+        "US",
+        "CH",
+        "DE",
+        "GB",
+        "----",
+        "AT",
+        "BE",
+        "BA",
+        "BG",
+        "CA",
+        "HR",
+        "CY",
+        "CZ",
+        "DK",
+        "EE",
+        "FI",
+        "FR",
+        "GR",
+        "HU",
+        "IS",
+        "IE",
+        "IT",
+        "LV",
+        "LT",
+        "LU",
+        "MK",
+        "MT",
+        "MD",
+        "ME",
+        "NL",
+        "NO",
+        "PL",
+        "PT",
+        "RO",
+        "RS",
+        "SK",
+        "SI",
+        "ES",
+        "SE"
+      ],
+      "required": true
+    },
+    "daysPath": {
+      "name": "days",
+      "description": "Number of days",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "default": 3,
+      "enum": [
+        3,
+        5,
+        7,
+        10
+      ]
+    },
+    "endQuery": {
+      "name": "end",
+      "description": "End TODO",
+      "in": "query",
+      "type": "integer",
+      "default": "0331",
+      "required": true
+    },
+    "endMonthQuery": {
+      "name": "end",
+      "description": "The end month [1-12].",
+      "in": "query",
+      "type": "integer",
+      "required": true,
+      "default": 3
+    },
+    "formatQuery": {
+      "name": "format",
+      "in": "query",
+      "type": "string",
+      "default": "json",
+      "required": true,
+      "enum": [
+        "json"
+      ]
+    },
+    "ftsQuery": {
+      "name": "fts",
+      "description": "Forecast Time Slice (fts) is an Epoch formatted time stamp. The example (fts) equates to: GMT: Tue, 21 Jul 2015 02:00:00 GMT",
+      "in": "query",
+      "default": 1428949000,
+      "type": "string"
+    },
+    "geocodeQuery": {
+      "name": "geocode",
+      "description": "The geocode in the format {latitude},{longitude}",
+      "in": "query",
+      "type": "string",
+      "required": false
+    },
+    "hoursQuery": {
+      "name": "hours",
+      "description": "Number of hours",
+      "in": "query",
+      "type": "integer",
+      "required": true,
+      "default": 1
+    },
+    "iataCodeQuery": {
+      "name": "iataCode",
+      "in": "query",
+      "type": "string",
+      "description": "Search by IATA Code",
+      "required": false
+    },
+    "icaoCodeQuery": {
+      "name": "icaoCode",
+      "in": "query",
+      "type": "string",
+      "description": "Search by icao Code",
+      "required": false
+    },
+    "latitudePath": {
+      "name": "latitude",
+      "in": "path",
+      "type": "number",
+      "format": "float",
+      "description": "The latitude of a geolocation",
+      "default": "34.063",
+      "required": true
+    },
+    "longitudePath": {
+      "name": "longitude",
+      "in": "path",
+      "type": "number",
+      "format": "float",
+      "default": "-83.217",
+      "description": "The longitude of a geolocation",
+      "required": true
+    },
+    "languageCodeQuery": {
+      "name": "language",
+      "in": "query",
+      "type": "string",
+      "description": "A valid language code <br /><br />",
+      "required": true,
+      "default": "en-US",
+      "enum": [
+        "en-US",
+        "en-GB",
+        "de-AT"
+      ]
+    },
+    "layerPath": {
+      "name": "layer",
+      "in": "path",
+      "type": "string",
+      "description": "The current condition or forecast layer to be requested",
+      "required": true,
+      "enum": [
+        "dewpoint",
+        "feelsLike",
+        "precip24hr",
+        "rwi",
+        "satrad",
+        "snow24hr",
+        "temp",
+        "tempChange",
+        "uv",
+        "windSpeed",
+        "radar",
+        "radarAustralian",
+        "cloudsFcst",
+        "dewpointFcst",
+        "feelsLikeFcst",
+        "precip24hrFcst",
+        "radarFcst",
+        "satradFcst",
+        "snow24hrFcst",
+        "tempFcst",
+        "uvFcst",
+        "windSpeedFcst"
+      ]
+    },
+    "locationTypeQuery": {
+      "name": "locationType",
+      "in": "query",
+      "type": "string",
+      "description": "The type of the searched location",
+      "default": "city",
+      "enum": [
+        "city",
+        "address"
+      ]
+    },
+    "postalCodeQuery": {
+      "name": "postalKey",
+      "in": "query",
+      "type": "string",
+      "description": "Search by Postal Code - Postal Key is a composite of <Postal Code>:<Country Code>",
+      "required": false
+    },
+    "queryQuery": {
+      "name": "query",
+      "description": "Search Query",
+      "in": "query",
+      "type": "string",
+      "default": "Atlanta",
+      "required": true
+    },
+    "startQuery": {
+      "name": "start",
+      "description": "Start TODO",
+      "in": "query",
+      "type": "integer",
+      "default": "0101",
+      "required": true
+    },
+    "startMonthQuery": {
+      "name": "start",
+      "description": "The start month [1-12].",
+      "in": "query",
+      "type": "integer",
+      "required": true,
+      "default": 1
+    },
+    "tsQuery": {
+      "name": "ts",
+      "description": "The time slice (ts) is an Epoch formatted time stamp. The example (ts) equates to: GMT: Mon, 20 Jul 2015 20:30:00 GMT",
+      "in": "query",
+      "default": 1437426000,
+      "type": "string"
+    },
+    "unitsQuery": {
+      "name": "units",
+      "in": "query",
+      "type": "string",
+      "default": "e",
+      "description": "The unit of measure for the response. The following values are supported:\n<ul>\n  <li>e = English units</li>\n  <li>m = Metric units</li>\n  <li>h = Hybrid units (UK)</li>\n  <li>s  = Metric SI units </li>\n</ul>",
+      "enum": [
+        "e",
+        "m",
+        "h",
+        "s"
+      ]
+    },
+    "xyzQuery": {
+      "name": "xyz",
+      "in": "query",
+      "type": "string",
+      "default": "0:0:1",
+      "description": "The xyz is the tile address scheme. Each tile is given an X and Y coordinate ranging from (0) in the upper left to (2zoom  -1, 2zoom  -1) in the lower right of a Mercator Projected map. <ul> <li> x ranges from 0 (left edge is 180°W) to 2zoom  -1 (right edge is 180°E) with TileX = floor(mapPixelX / 256) </li> <li> y ranges from 0 (top edge is 85.0511°N) to 2zoom  -1 (bottom edge is 85.0511°S) with TileY = floor(mapPixelY/256) </li> <li> z is the zoom level defined for the image </li> </ul>"
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
