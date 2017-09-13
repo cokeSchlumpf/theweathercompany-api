@@ -10,7 +10,11 @@ info:
     is automatically scales to deliver tens of Billions average daily requests
     with extremely low latency.
     <br /><br />
-    More details can be found in the official documentation - https://goo.gl/B8g4Y1
+    More details can be found in the official documentation:
+    <ul>
+      <li><b>Overview:</b> https://goo.gl/B8g4Y1</li>
+      <li><b>Common Usage Guide:</b> https://goo.gl/xDJKPE</li>
+    </ul>
   version: HackZurich
   title: The Weather Company Data APIs
   contact:
