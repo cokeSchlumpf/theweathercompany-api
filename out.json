@@ -1,0 +1,433 @@
+{
+  "/v1/location/{location}/forecast/daily/{days}day.json": {
+    "get": {
+      "tags": [
+        "Core"
+      ],
+      "summary": "Daily Forecast (3-Day, 5-Day, 7-Day, 10-Day)",
+      "description": "The Daily Forecast  API is sourced from the The Weather Company Forecast system.  This TWC API returns weather forecasts starting current day. Your content licensing agreement with TWC determines the number of days returned in the API response and is constrained by the API Key that is provided to your company.  Please refer to the Data Elements section later in this document for more details.  <br /><br /> **Forecast Composition**\nThe TWC daily forecast product can contain multiple days of daily forecasts for each location. Each day of a forecast can contain up to (3) \"temporal segments\" meaning three separate forecasts. For any given forecast day we offer day, night, and a 24-hour forecast (daily summary). Implementing our forecasts requires your applications to perform basic processing in order to properly ingest the forecast data feeds. <br /><br/> **Forecast Implementation**\nThe data values in this API are correctly populated into Day, Night, or 24-hour temporal segments. These segments are separate objects in the response. <br /><br /> For more details please visit Documentation - TODO.",
+      "parameters": [
+        {
+          "$ref": "#/parameters/locationPath"
+        },
+        {
+          "$ref": "#/parameters/daysPath"
+        },
+        {
+          "$ref": "#/parameters/unitsQuery"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Please see documentation for details: https://goo.gl/H3Ijuj"
+        }
+      }
+    }
+  },
+  "/v1/location/{location}/forecast/intraday/{days}day.json": {
+    "get": {
+      "tags": [
+        "Core"
+      ],
+      "summary": "Intraday Forecast (3-Day, 5-Day, 7-Day, 10-Day, 15-Day)",
+      "description": "The Intraday Forecast  API is sourced from the The Weather Company Forecast system. This TWC API returns weather forecasts in 6-hour periods starting current day. The 6-hour periods are Morning, Afternoon, Evening, and Overnight. Your content licensing agreement with TWC determines the number of days returned in the API response and is constrained by the API Key that is provided to your company.  <br /><br /> **Understanding Intraday Forecasts**\nThe Intraday Forecast product breaks down the days forecasts into (four) 6-hour segments for each of the included days. <br /><br /> For more details please visit Documentation - TODO.",
+      "parameters": [
+        {
+          "$ref": "#/parameters/locationPath"
+        },
+        {
+          "$ref": "#/parameters/daysPath"
+        },
+        {
+          "$ref": "#/parameters/unitsQuery"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Please see documentation for details: https://goo.gl/ZzU2cb"
+        }
+      }
+    }
+  },
+  "/v1/location/{location}/forecast/hourly/48hour.json": {
+    "get": {
+      "tags": [
+        "Core"
+      ],
+      "summary": "2 Day Hourly Forecast",
+      "description": "The Hourly Forecast  API is sourced from the The Weather Company Forecast system. This TWC API returns weather forecasts starting current day. Your content licensing agreement with TWC determines the number of days returned in the API response and is constrained by the API Key that is provided to your company.  Please refer to the Data Elements section later in this document for more details.  <br /><br /> For more details please visit Documentation - https://goo.gl/yCt3Ju.",
+      "parameters": [
+        {
+          "$ref": "#/parameters/locationPath"
+        },
+        {
+          "$ref": "#/parameters/unitsQuery"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Please see documentation for details: https://goo.gl/yCt3Ju"
+        }
+      }
+    }
+  },
+  "/v1/location/{location}/forecast/fifteenminute.json": {
+    "get": {
+      "tags": [
+        "Core"
+      ],
+      "summary": "15 Minute Forecast",
+      "description": "The short range 15 Minute Forecast API is sourced from the TWC Forecast system.  This API returns weather content consisting of forecasted weather for the next 15 minutes increment time steps out to 7 hours.  <br /><br /> <b>Understanding the 15-Minute Forecasts</b><br /> Implementing our forecasts requires your applications to perform basic processing in order to properly ingest the forecast data feeds. <br /><br /> <b>Forecast Composition</b><br /> The TWC 15 Minute forecast product can contain up to 28 short range forecasts for each location.  You should discard all previous hourly forecasts for a given forecast location when a new record is received. <br /><br /> <b>Forecast Implementation</b><br /> To request and display the 15 Minute Forecast product there is no need to pass a parameter to select an hour. Each request will return the full 15 Minute Forecast. <br /><br /> For more details please visit Documentation - https://goo.gl/nb5XUx.",
+      "parameters": [
+        {
+          "$ref": "#/parameters/locationPath"
+        },
+        {
+          "$ref": "#/parameters/unitsQuery"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Please see documentation for details - https://goo.gl/nb5XUx"
+        },
+        "401": {
+          "description": "Unauthorized. Please enter API key using the Authorize Button."
+        }
+      }
+    }
+  },
+  "/v1/location/{location}/forecast/nowcast.json": {
+    "get": {
+      "tags": [
+        "Core"
+      ],
+      "summary": "Nowcast",
+      "description": "The short range Nowcast Forecast API is sourced from the TWC Forecast system. This API provides a text summary of the weather forecast for the next 6 hour period for today. Please refer to the Data Elements section later in this document for more details.  <br /><br /> For more details please visit Documentation - https://goo.gl/G65500.",
+      "parameters": [
+        {
+          "$ref": "#/parameters/locationPath"
+        },
+        {
+          "$ref": "#/parameters/unitsQuery"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Please see documentation for details: https://goo.gl/G65500"
+        },
+        "401": {
+          "description": "Unauthorized. Please enter API key using the Authorize Button."
+        }
+      }
+    }
+  },
+  "/v1/location/{location}/forecast/precipitation.json": {
+    "get": {
+      "tags": [
+        "Core"
+      ],
+      "summary": "Precipitation Forecast",
+      "description": "The  Precipitation Events Forecast API provides a weather forecast for precipitation events(rain, snow, sleet, freezing rain) onset and offset times for 28 time steps over the next 7 hours. <br /><br /> <b>Understanding the Precipitation Forecast</b> <br /><br /> <b>Forecast Composition</b><br /> <ol>\n  <li>\n    The Precipitation Events Forecast (aka \"onset/offset\", aka \"precip events\") is the summary \"events\" of the raw 15-minute data. In practice 24 time steps are almost never returned. There is often only 1 event (e.g., \"dry through the entire 6hr period\"). However, there will always be at least one event returned. While the theoretical maximum is 24 events, in practice it rarely goes above 10-12 events.\n  </li>\n  <li>\n    During a 6 hour period if the weather changes from dry to cloudy to rain or snow then you have a record for each part with start time and end time. Unlike like hourly  or other time sliced forecast that are based on time period. This forecast is based on weather events and not on time.\n  </li>\n</ol> <b>Forecast Implementation</b><br /> To request and display the Precipitation Events product. You need not pass a parameter to select an hour or day. Each request will return the full precipitation events for the next 6 hours. <br /><br /> For more details please visit Documentation - https://goo.gl/9qJBpN.",
+      "parameters": [
+        {
+          "$ref": "#/parameters/locationPath"
+        },
+        {
+          "$ref": "#/parameters/unitsQuery"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Please see documentation for details: https://goo.gl/9qJBpN"
+        },
+        "401": {
+          "description": "Unauthorized. Please enter API key using the Authorize Button."
+        }
+      }
+    }
+  },
+  "/v1/location/{location}/forecast/wwir.json": {
+    "get": {
+      "tags": [
+        "Core"
+      ],
+      "summary": "Precipitation Forecast",
+      "description": "The When Will It Rain Forecast API provides a weather forecast over the next 6 hours based upon data from the Precipitation Events forecast. The Precipitation Events Forecast API provides a weather forecast for precipitation events (rain, snow, sleet, freezing rain) onset and offset times for 28 time steps over the next 7 hours.   <br /><br /> For more details please visit Documentation - https://goo.gl/NaT8SG",
+      "parameters": [
+        {
+          "$ref": "#/parameters/locationPath"
+        },
+        {
+          "$ref": "#/parameters/unitsQuery"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Please see documentation for details: https://goo.gl/NaT8SG"
+        },
+        "401": {
+          "description": "Unauthorized. Please enter API key using the Authorize Button."
+        }
+      }
+    }
+  },
+  "/v1/location/{location}/almanac/daily.json": {
+    "get": {
+      "tags": [
+        "Core"
+      ],
+      "summary": "Almanac Daily",
+      "description": "The Almanac product provides the record high, record low, and average temperatures for a given location. The almanac information for this API is sourced from National Weather Service observations stations from a time period spanning 10 to 30 years or more. The information is gathered and provided by the National Climatic Data Center (NCDC). <br /><br /> For more details please visit Documentation - https://goo.gl/1zKfVs.",
+      "parameters": [
+        {
+          "$ref": "#/parameters/locationPath"
+        },
+        {
+          "$ref": "#/parameters/unitsQuery"
+        },
+        {
+          "$ref": "#/parameters/startQuery"
+        },
+        {
+          "$ref": "#/parameters/endQuery"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Please see documentation for details: https://goo.gl/1zKfVs"
+        }
+      }
+    }
+  },
+  "/v1/location/{location}/almanac/monthly.json": {
+    "get": {
+      "tags": [
+        "Core"
+      ],
+      "summary": "Almanac Monthly",
+      "description": "The Almanac product provides the record high, record low, and average temperatures for a given location. The almanac information for this API is sourced from National Weather Service observations stations from a time period spanning 10 to 30 years or more. The information is gathered and provided by the National Climatic Data Center (NCDC). <br /><br /> For more details please visit Documentation - https://goo.gl/wGMn6w.",
+      "parameters": [
+        {
+          "$ref": "#/parameters/locationPath"
+        },
+        {
+          "$ref": "#/parameters/unitsQuery"
+        },
+        {
+          "$ref": "#/parameters/startMonthQuery"
+        },
+        {
+          "$ref": "#/parameters/endMonthQuery"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Please see documentation for details: https://goo.gl/wGMn6w"
+        }
+      }
+    }
+  },
+  "/v1/location/{location}/observations.json": {
+    "get": {
+      "tags": [
+        "Core"
+      ],
+      "summary": "Site-Based Current Conditions",
+      "description": "Current Conditions are sourced from both physical site-based observation stations and synthetic weather observations produced by the TWC Currents system. This API returns the  latest weather observation for the location supplied to include current temperatures, winds, pressure and other observed weather information. Weather observations from physical devices deployed worldwide (weather data collected from METAR, SYNOP, BUOY, CMAN devices). <br /><br /> **Current Condition & Time-Series Data**\nAccess to retained site-based and synthetic data will be distributed on-demand in Current Conditions and Time Series data feeds.   These recent observations are retained in the primary TWC database up to 48 hours ( 2 days ) on specific reporting stations and nn hours of observations per station.  Observations per station within a 24 hour period varies due to station operation requirements (i.e. modified operating hours, number of observations recorded per hour, maintenance issues, etc).  <br /><br /> The recent observations data will be continuously updated and replaced with a first-in / first-out methodology, (rotating data with newest observation and moving the oldest observations to the archive storage) based on date/time stamping of the observations. The amount of data retained and available from any given station may be more than a single observation or more than 24 individual observation reports for any given station id. The number of observations is determined by the type of observation it is, i.e. NWS, etc. \n<br /><br /> For more details please visit Documentation - https://goo.gl/vycisA.",
+      "parameters": [
+        {
+          "$ref": "#/parameters/locationPath"
+        },
+        {
+          "$ref": "#/parameters/unitsQuery"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Please see documentation for details: https://goo.gl/vycisA"
+        }
+      }
+    }
+  },
+  "/v1/location/{location}/observations/timeseries.json": {
+    "get": {
+      "tags": [
+        "Core"
+      ],
+      "summary": "Time-Series Observations (Current & 24 Hours Past)",
+      "description": "The Time-Series Observations returns the previous 24 hour period from the previous day up to the last reported current condition today. Current Conditions are sourced from both physical site-based observation stations and synthetic weather observations produced by the TWC Currents system. This API returns the  latest weather observation for the location supplied to include current temperatures, winds, pressure and other observed weather information. Weather observations from physical devices deployed worldwide (weather data collected from METAR, SYNOP, BUOY, CMAN devices), and the synthetic weather observations (TECCI) produced by the TWC Currents system. <br /><br /> **Current Condition & Time-Series Data**\nAccess to retained site-based and synthetic data will be distributed on-demand in Current Conditions and Time Series data feeds. Observations per station within a 24 hour period varies due to station operation requirements (i.e. modified operating hours, number of observations recorded per hour, maintenance issues, etc).  <br /><br /> The recent observations data will be continuously updated and replaced with a first-in / first-out methodology, (rotating data with newest observation and moving the oldest observations to the archive storage) based on date/time stamping of the observations. The amount of data retained and available from any given station may be more than a single observation or more than 24 individual observation reports for any given station id. The number of observations is determined by the type of observation reported i.e. NWS, etc.  <br /><br /> It is not to be assumed that data returned will be equal to the hours of past observations requested.  Example: 3 hours of past observations may not return just 3 observations. <br /><br /> Some reporting stations report observations more than once an hour. <br /><br /> For more details please visit Documentation - https://goo.gl/1RWzPl.",
+      "parameters": [
+        {
+          "$ref": "#/parameters/locationPath"
+        },
+        {
+          "$ref": "#/parameters/unitsQuery"
+        },
+        {
+          "$ref": "#/parameters/hoursQuery"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Please see documentation for details:https://goo.gl/1RWzPl"
+        }
+      }
+    }
+  },
+  "/v1/location/{location}/observations/airquality.json": {
+    "get": {
+      "tags": [
+        "Core"
+      ],
+      "summary": "Air Quality - U.S.",
+      "description": "The air quality data for the U.S. includes principal pollutants, pollutant indices and levels, and ozone action day phrases.  <br /><br /> For more details please visit Documentation - https://goo.gl/ANMHWX.",
+      "parameters": [
+        {
+          "$ref": "#/parameters/locationPath"
+        },
+        {
+          "$ref": "#/parameters/unitsQuery"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Please see documentation for details: https://goo.gl/ANMHWX"
+        },
+        "401": {
+          "description": "Unauthorized. Please enter API key using the Authorize Button."
+        }
+      }
+    }
+  },
+  "/v1/location/{location}/observations/airquality/historical.json": {
+    "get": {
+      "tags": [
+        "Core"
+      ],
+      "summary": "Air Quality - U.S. Historical",
+      "description": "The air quality data for the U.S. includes principal pollutants, pollutant indices and levels, and ozone action day phrases.  The Historical U.S. Air Quality Daily Summary API returns historical daily maximum values for up to 31 days per location.  <br /><br /> **Note:**The current Historical Air Quality Archive begins July 2015 <br /><br /> For more details please visit Documentation - https://goo.gl/tYO4Jx.",
+      "parameters": [
+        {
+          "$ref": "#/parameters/locationPath"
+        },
+        {
+          "$ref": "#/parameters/unitsQuery"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Please see documentation for details: https://goo.gl/tYO4Jx"
+        },
+        "401": {
+          "description": "Unauthorized. Please enter API key using the Authorize Button."
+        }
+      }
+    }
+  },
+  "/v1/location/{location}/observations/summary/historical.json": {
+    "get": {
+      "tags": [
+        "Core"
+      ],
+      "summary": "Air Quality - U.S. Summary",
+      "description": "The air quality data for the U.S. includes principal pollutants, pollutant indices and levels, and ozone action day phrases.  The Historical U.S. Air Quality Daily Summary API returns historical daily maximum values for up to 31 days per location.  <br /><br /> **Note:**The current Historical Air Quality Archive begins July 2015 <br /><br /> For more details please visit Documentation - https://goo.gl/AyJQ0B.",
+      "parameters": [
+        {
+          "$ref": "#/parameters/locationPath"
+        },
+        {
+          "$ref": "#/parameters/unitsQuery"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Please see documentation for details: https://goo.gl/AyJQ0B"
+        },
+        "401": {
+          "description": "Unauthorized. Please enter API key using the Authorize Button."
+        }
+      }
+    }
+  },
+  "/v1/location/{location}/observations/historical.json": {
+    "get": {
+      "tags": [
+        "Core"
+      ],
+      "summary": "Historical Site-Based Observations",
+      "description": "Historical site-based observations are sourced from both physical site-based observation stations and synthetic weather observations produced by the TWC Currents system. This API returns the  latest weather observation for the location supplied to include current temperatures, winds, pressure and other observed weather information. Weather observations from physical devices deployed worldwide (weather data collected from METAR, SYNOP, BUOY, CMAN devices). <br /><br /> <b>Site-based Historical Observations</b><br /> Access to retained site-based and synthetic data will be distributed on-demand in historical data feeds. Past weather observations, up to one month (31 days max) of archived weather observation data for the location and date or daterange requested. <br /><br /> <b>Limitation:</b><br /> Archived observation data varies significantly by station and location. The earliest date of data recorded is from January 1931, but not all months from this time forward are available. Observations per station within a 24 hour period varies due to station operation requirements (i.e. modified operating hours, number of observations recorded per hour, maintenance issues, etc).  <br /><br /> <b>Historical Observations Data and Their Limitations</b><br /> Historical observations are “archived” and originate from METAR and SYNOP observation stations/devices. Although there is archived observation data dating back to January 1931 from some METAR stations, the available historical data is not contiguous for all months in a given year, for every year, and for all locations. Please be aware that there is a large volume of historical records that can be retrieved. However there are gaps in which a “no data found” message will be displayed for a period. When observation data is provided, it is recommended that processing rules be applied to ensure the desired ordering of the observations (oldest to newest, newest to oldest) using the observation date/time element in the feed. Reporting stations report weather observations at different intervals. Some observations are reported hourly, some every 3 hours, every 6 hours, etc. Some stations do not report during nighttime hours. <br /><br /> Please Note that minimum and maximum temperature values are often null. The National Weather Service in the U.S. did not begin to provide these elements until recent years. <br /><br /> For more details please visit Documentation - https://goo.gl/auOfXL.",
+      "parameters": [
+        {
+          "$ref": "#/parameters/locationPath"
+        },
+        {
+          "$ref": "#/parameters/startDateQuery"
+        },
+        {
+          "$ref": "#/parameters/endDateQuery"
+        },
+        {
+          "$ref": "#/parameters/unitsQuery"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Please see documentation for details: https://goo.gl/auOfXL"
+        },
+        "401": {
+          "description": "Unauthorized. Please enter API key using the Authorize Button."
+        }
+      }
+    }
+  },
+  "/v1/location/{location}/flu.json": {
+    "get": {
+      "tags": [
+        "Core"
+      ],
+      "summary": "U.S. Flu Outbreak",
+      "description": "The Flu Outbreak API provides a color code and description of the geographic spread of influenza as assessed by state and territorial epidemiologists . Flu activity data is typically available at the end of every week during flu season (October - May) from the CDC in Atlanta, GA. Geography coverage is for United States including territories Guam (GU), Puerto Rico (PR), and Virgin Islands (VI). <br /><br /> <b>Understanding Flu Outbreak</b><br /> Implementing the Flu Outbreak data feed requires your application to perform iterative processing in order to properly ingest the weekly flu data set voluntarily reported by each state. Flu surveillance data collection is based on a reporting week that starts on Sunday and ends on Saturday of each week.  Each call returns a color/ flu activity description pair summarizing the flu activity for the prior week. <br /><br /> <b>Flu Outbreak Composition</b><br /> Summary of the Geographic Spread of Influenza (source: CDC.gov). State health departments report the estimated level of geographic spread of influenza activity in their states each week through the State and Territorial Epidemiologists Reports.  The Flu Activity element can have 1 of 5 values defined as follows for each US state/territory. <br /><br /> For more details please visit Documentation - https://goo.gl/8vYB6N.",
+      "parameters": [
+        {
+          "$ref": "#/parameters/locationPath"
+        },
+        {
+          "$ref": "#/parameters/unitsQuery"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Please see documentation for details: https://goo.gl/8vYB6N"
+        },
+        "401": {
+          "description": "Unauthorized. Please enter API key using the Authorize Button."
+        }
+      }
+    }
+  },
+  "/v1/location/{location}/forecast/tides.json": {
+    "get": {
+      "tags": [
+        "Core"
+      ],
+      "summary": "U.S. Tides",
+      "description": "The U.S. Tides API returns marine tide predictions for up to the next 30 days for +3,000 coastal locations in United States and it territories. The tidal predictions are generated from harmonic or subordinate tide station/locations. Harmonic locations (also known as reference sites) are generated by regular water level reading sites. Subordinate locations predictions are derived by applying corrections to a reference tide station. This API uses the tide station IDs posted by National Oceanic and Atmospheric Association (NOAA). <br /><br /> For more details please visit Documentation - https://goo.gl/KuhH6i.",
+      "parameters": [
+        {
+          "$ref": "#/parameters/locationPath"
+        },
+        {
+          "$ref": "#/parameters/unitsQuery"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Please see documentation for details: https://goo.gl/KuhH6i"
+        },
+        "401": {
+          "description": "Unauthorized. Please enter API key using the Authorize Button."
+        }
+      }
+    }
+  }
+}
