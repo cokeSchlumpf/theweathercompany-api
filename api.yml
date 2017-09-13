@@ -17,21 +17,22 @@ info:
     email: michael.wellner@de.ibm.com
 host: api.weather.com
 tags:
+  - name: By Geocode
+    description: ''
+  - name: By Location
+    description: ''
   - name: Alerts
-    description: Weather Core APIs
-    externalDocs:
-      description: Get more details
-      url: 'https://goo.gl/bc2yDb'
-  - name: Location Services
-    description: 'APIs for searching locations, resolving geocodes etc.'
-    externalDocs:
-      description: Get more details
-      url: 'https://goo.gl/bc2yDb'
+    description: ''
+  - name: Forecast
+    description: ''
+  - name: Lifestyle
+    description: ''
+  - name: Observations
+    description: ''
+  - name: Utility
+    description: ''
   - name: Weather Imagery
-    description: Weather Imagery APIs
-    externalDocs:
-      description: Get more details
-      url: 'https://goo.gl/LXP7HM'
+    description: ''
 schemes:
   - https
 security:
@@ -40,7 +41,7 @@ paths:
   '/v1/country/{countryCode}/alerts.json':
     get:
       tags:
-        - Core
+        - Alerts
       summary: Weather Alert Headlines
       description: >-
         The Weather Alert Headlines API provides weather watches, warnings,
@@ -72,7 +73,7 @@ paths:
   '/v1/alert/{key}/details.json':
     get:
       tags:
-        - Core
+        - Alerts
       summary: Weather Alert Details
       description: >-
         The Weather Alert Details API provides weather watches, warnings,
@@ -110,7 +111,8 @@ paths:
   '/v1/geocode/{latitude}/{longitude}/forecast/daily/{days}day.json':
     get:
       tags:
-        - Core
+        - By Geocode
+        - Forecast
       summary: 'Daily Forecast (3-Day, 5-Day, 7-Day, 10-Day, 15-Day)'
       description: >-
         The Daily Forecast  API is sourced from the The Weather Company Forecast
@@ -146,7 +148,8 @@ paths:
   '/v1/geocode/{latitude}/{longitude}/forecast/intraday/{days}day.json':
     get:
       tags:
-        - Core
+        - By Geocode
+        - Forecast
       summary: 'Intraday Forecast (3-Day, 5-Day, 7-Day, 10-Day, 15-Day)'
       description: >-
         The Intraday Forecast  API is sourced from the The Weather Company
@@ -173,7 +176,8 @@ paths:
   '/v1/geocode/{latitude}/{longitude}/forecast/hourly/48hour.json':
     get:
       tags:
-        - Core
+        - By Geocode
+        - Forecast
       summary: 2 Day Hourly Forecast
       description: >-
         The Hourly Forecast  API is sourced from the The Weather Company
@@ -195,7 +199,8 @@ paths:
   '/v1/geocode/{latitude}/{longitude}/forecast/fifteenminute.json':
     get:
       tags:
-        - Core
+        - By Geocode
+        - Forecast
       summary: 15 Minute Forecast
       description: >-
         The short range 15 Minute Forecast API is sourced from the TWC Forecast
@@ -224,7 +229,8 @@ paths:
   '/v1/geocode/{latitude}/{longitude}/forecast/nowcast.json':
     get:
       tags:
-        - Core
+        - By Geocode
+        - Forecast
       summary: Nowcast
       description: >-
         The short range Nowcast Forecast API is sourced from the TWC Forecast
@@ -244,7 +250,8 @@ paths:
   '/v1/geocode/{latitude}/{longitude}/forecast/precipitation.json':
     get:
       tags:
-        - Core
+        - By Geocode
+        - Forecast
       summary: Precipitation Forecast
       description: >-
         The  Precipitation Events Forecast API provides a weather forecast for
@@ -275,7 +282,8 @@ paths:
   '/v1/geocode/{latitude}/{longitude}/forecast/wwir.json':
     get:
       tags:
-        - Core
+        - By Geocode
+        - Forecast
       summary: Precipitation Forecast
       description: >-
         The When Will It Rain Forecast API provides a weather forecast over the
@@ -296,7 +304,8 @@ paths:
   '/v1/geocode/{latitude}/{longitude}/almanac/daily.json':
     get:
       tags:
-        - Core
+        - By Geocode
+        - Lifestyle
       summary: Almanac Daily
       description: >-
         The Almanac product provides the record high, record low, and average
@@ -317,7 +326,8 @@ paths:
   '/v1/geocode/{latitude}/{longitude}/almanac/monthly.json':
     get:
       tags:
-        - Core
+        - By Geocode
+        - Lifestyle
       summary: Almanac Monthly
       description: >-
         The Almanac product provides the record high, record low, and average
@@ -338,7 +348,8 @@ paths:
   '/v1/geocode/{latitude}/{longitude}/observations.json':
     get:
       tags:
-        - Core
+        - By Geocode
+        - Observations
       summary: Site-Based Current Conditions
       description: >-
         Current Conditions are sourced from both physical site-based observation
@@ -379,7 +390,8 @@ paths:
   '/v1/geocode/{latitude}/{longitude}/observations/timeseries.json':
     get:
       tags:
-        - Core
+        - By Geocode
+        - Observations
       summary: Time-Series Observations (Current & 24 Hours Past)
       description: >-
         The Time-Series Observations returns the previous 24 hour period from
@@ -423,7 +435,8 @@ paths:
   '/v1/geocode/{latitude}/{longitude}/observations/airquality.json':
     get:
       tags:
-        - Core
+        - By Geocode
+        - Observations
       summary: Air Quality - U.S.
       description: >-
         The air quality data for the U.S. includes principal pollutants,
@@ -441,7 +454,8 @@ paths:
   '/v1/geocode/{latitude}/{longitude}/observations/airquality/historical.json':
     get:
       tags:
-        - Core
+        - By Geocode
+        - Observations
       summary: Air Quality - U.S. Historical
       description: >-
         The air quality data for the U.S. includes principal pollutants,
@@ -463,7 +477,8 @@ paths:
   '/v1/geocode/{latitude}/{longitude}/observations/summary/historical.json':
     get:
       tags:
-        - Core
+        - By Geocode
+        - Observations
       summary: Air Quality - U.S. Summary
       description: >-
         The air quality data for the U.S. includes principal pollutants,
@@ -485,7 +500,8 @@ paths:
   '/v1/geocode/{latitude}/{longitude}/observations/historical.json':
     get:
       tags:
-        - Core
+        - By Geocode
+        - Observations
       summary: Historical Site-Based Observations
       description: >-
         Historical site-based observations are sourced from both physical
@@ -538,7 +554,8 @@ paths:
   '/v1/geocode/{latitude}/{longitude}/flu.json':
     get:
       tags:
-        - Core
+        - By Geocode
+        - Lifestyle
       summary: U.S. Flu Outbreak
       description: >-
         The Flu Outbreak API provides a color code and description of the
@@ -573,7 +590,8 @@ paths:
   '/v1/geocode/{latitude}/{longitude}/forecast/tides.json':
     get:
       tags:
-        - Core
+        - By Geocode
+        - Lifestyle
       summary: U.S. Tides
       description: >-
         The U.S. Tides API returns marine tide predictions for up to the next 30
@@ -597,7 +615,8 @@ paths:
   '/v1/location/{location}/forecast/daily/{days}day.json':
     get:
       tags:
-        - Core
+        - By Location
+        - Forecast
       summary: 'Daily Forecast (3-Day, 5-Day, 7-Day, 10-Day)'
       description: >-
         The Daily Forecast  API is sourced from the The Weather Company Forecast
@@ -630,7 +649,8 @@ paths:
   '/v1/location/{location}/forecast/intraday/{days}day.json':
     get:
       tags:
-        - Core
+        - By Location
+        - Forecast
       summary: 'Intraday Forecast (3-Day, 5-Day, 7-Day, 10-Day, 15-Day)'
       description: >-
         The Intraday Forecast  API is sourced from the The Weather Company
@@ -654,7 +674,8 @@ paths:
   '/v1/location/{location}/forecast/hourly/48hour.json':
     get:
       tags:
-        - Core
+        - By Location
+        - Forecast
       summary: 2 Day Hourly Forecast
       description: >-
         The Hourly Forecast  API is sourced from the The Weather Company
@@ -673,7 +694,8 @@ paths:
   '/v1/location/{location}/forecast/fifteenminute.json':
     get:
       tags:
-        - Core
+        - By Location
+        - Forecast
       summary: 15 Minute Forecast
       description: >-
         The short range 15 Minute Forecast API is sourced from the TWC Forecast
@@ -701,7 +723,8 @@ paths:
   '/v1/location/{location}/forecast/nowcast.json':
     get:
       tags:
-        - Core
+        - By Location
+        - Forecast
       summary: Nowcast
       description: >-
         The short range Nowcast Forecast API is sourced from the TWC Forecast
@@ -720,7 +743,8 @@ paths:
   '/v1/location/{location}/forecast/precipitation.json':
     get:
       tags:
-        - Core
+        - By Location
+        - Forecast
       summary: Precipitation Forecast
       description: >-
         The  Precipitation Events Forecast API provides a weather forecast for
@@ -750,7 +774,8 @@ paths:
   '/v1/location/{location}/forecast/wwir.json':
     get:
       tags:
-        - Core
+        - By Location
+        - Forecast
       summary: Precipitation Forecast
       description: >-
         The When Will It Rain Forecast API provides a weather forecast over the
@@ -770,7 +795,8 @@ paths:
   '/v1/location/{location}/almanac/daily.json':
     get:
       tags:
-        - Core
+        - By Location
+        - Lifestyle
       summary: Almanac Daily
       description: >-
         The Almanac product provides the record high, record low, and average
@@ -790,7 +816,8 @@ paths:
   '/v1/location/{location}/almanac/monthly.json':
     get:
       tags:
-        - Core
+        - By Location
+        - Lifestyle
       summary: Almanac Monthly
       description: >-
         The Almanac product provides the record high, record low, and average
@@ -810,7 +837,8 @@ paths:
   '/v1/location/{location}/observations.json':
     get:
       tags:
-        - Core
+        - By Location
+        - Observations
       summary: Site-Based Current Conditions
       description: >-
         Current Conditions are sourced from both physical site-based observation
@@ -850,7 +878,8 @@ paths:
   '/v1/location/{location}/observations/timeseries.json':
     get:
       tags:
-        - Core
+        - By Location
+        - Observations
       summary: Time-Series Observations (Current & 24 Hours Past)
       description: >-
         The Time-Series Observations returns the previous 24 hour period from
@@ -893,7 +922,8 @@ paths:
   '/v1/location/{location}/observations/airquality.json':
     get:
       tags:
-        - Core
+        - By Location
+        - Observations
       summary: Air Quality - U.S.
       description: >-
         The air quality data for the U.S. includes principal pollutants,
@@ -910,7 +940,8 @@ paths:
   '/v1/location/{location}/observations/airquality/historical.json':
     get:
       tags:
-        - Core
+        - By Location
+        - Lifestyle
       summary: Air Quality - U.S. Historical
       description: >-
         The air quality data for the U.S. includes principal pollutants,
@@ -931,7 +962,8 @@ paths:
   '/v1/location/{location}/observations/summary/historical.json':
     get:
       tags:
-        - Core
+        - By Location
+        - Lifestyle
       summary: Air Quality - U.S. Summary
       description: >-
         The air quality data for the U.S. includes principal pollutants,
@@ -952,7 +984,8 @@ paths:
   '/v1/location/{location}/observations/historical.json':
     get:
       tags:
-        - Core
+        - By Location
+        - Observations
       summary: Historical Site-Based Observations
       description: >-
         Historical site-based observations are sourced from both physical
@@ -1004,7 +1037,8 @@ paths:
   '/v1/location/{location}/flu.json':
     get:
       tags:
-        - Core
+        - By Location
+        - Lifestyle
       summary: U.S. Flu Outbreak
       description: >-
         The Flu Outbreak API provides a color code and description of the
@@ -1038,7 +1072,8 @@ paths:
   '/v1/location/{location}/forecast/tides.json':
     get:
       tags:
-        - Core
+        - By Location
+        - Lifestyle
       summary: U.S. Tides
       description: >-
         The U.S. Tides API returns marine tide predictions for up to the next 30
@@ -1061,7 +1096,7 @@ paths:
   /v2/indices/achePain/daypart/15day:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Aches & Pains Index - Daypart - 15 Day
       description: >-
         The Aches and Pains index indicates the weather’s influence on an
@@ -1079,7 +1114,7 @@ paths:
   /v2/indices/breathing/daypart/15day:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Breathing Index - Daypart - 15 Day
       description: >-
         The Breathing index indicates weather’s influence on the ability to
@@ -1097,7 +1132,7 @@ paths:
   /v2/indices/degreeDays/daily/15day:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Degree Days Index - Daily - 15 Day
       description: >-
         The Degree Days index provides the indices for cooling degree days,
@@ -1115,7 +1150,7 @@ paths:
   /v2/indices/drivingDifficulty/current:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Driving Difficulty Index - Current Conditions
       description: >-
         The Driving Difficulty index provides indices of driving difficulty, or
@@ -1133,7 +1168,7 @@ paths:
   /v2/indices/drivingDifficulty/daypart/15day:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Driving Difficulty Index - Daypart - 15 Day
       description: >-
         The Driving Difficulty index provides indices of driving difficulty, or
@@ -1151,7 +1186,7 @@ paths:
   /v2/indices/drivingDifficulty/hourly/360hour:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Driving Difficulty Index - Hourly - 15 Day
       description: >-
         The Driving Difficulty index provides indices of driving difficulty, or
@@ -1169,7 +1204,7 @@ paths:
   /v2/indices/drySkin/daypart/15day:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Dry Skin Index - Daypart - 15 Day
       description: >-
         The Dry Skin index provides indices indicating likelihood that a person
@@ -1187,7 +1222,7 @@ paths:
   /v2/indices/frizz/daypart/15day:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Frizz Index - 15 Day
       description: >-
         The Frizz Index provides indices indicating likelihood that a person
@@ -1205,7 +1240,7 @@ paths:
   /v2/indices/frost/daypart/15day:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Frost Potential Index - Daypart - 15 Day
       description: >-
         The Frost Potential Index provides an indices indicating likelihood of
@@ -1223,7 +1258,7 @@ paths:
   /v2/indices/golf/daypart/15day:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Golf Index - Daypart - 15 Day
       description: >-
         The Golf Index provides an indices of golfing weather conditions. <br
@@ -1241,7 +1276,7 @@ paths:
   /v2/indices/golf/hourly/360hour:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Golf Index - Hourly - 15 Day
       description: >-
         The Golf Index provides an indices of golfing weather conditions. <br
@@ -1259,7 +1294,7 @@ paths:
   /v2/indices/heatCool/daypart/15day:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Heating & Cooling Index - Daypart - 15 Day
       description: >-
         The Heating and Cooling index provides indices describing the amount of
@@ -1278,7 +1313,7 @@ paths:
   /v2/indices/travel/daypart/15day:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Leisure Travel Index - Daypart - 15 Day
       description: >-
         The Leisure Travel index provides indices of outdoor travel /
@@ -1296,7 +1331,7 @@ paths:
   /v2/indices/travel/hourly/360hour:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Leisure Travel Index - Hourly - 15 Day
       description: >-
         The Leisure Travel index provides indices of outdoor travel /
@@ -1314,7 +1349,7 @@ paths:
   /v2/indices/mosquito/daily/15day:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Mosquito Activity Index - Daily - 15 Day
       description: >-
         The Mosquito index indicates the weather’s influence on the activity of
@@ -1332,7 +1367,7 @@ paths:
   /v2/indices/pollen/daypart/15day:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Pollen Index - Daypart - Daypart - 15 Day
       description: >-
         The Pollen index provides forecast indices for Grass, Ragweed, and Tree
@@ -1350,7 +1385,7 @@ paths:
   /v2/indices/runWeather/daypart/15day:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Running Weather Index - Daypart - 15 Day
       description: >-
         The Running Weather Index provides indices of outdoor running conditions
@@ -1368,7 +1403,7 @@ paths:
   /v2/indices/runWeather/hourly/360hour:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Running Weather Index - Hourly - 15 Day
       description: >-
         The Running Weather Index provides indices of outdoor running conditions
@@ -1386,7 +1421,7 @@ paths:
   /v2/indices/ski/daypart/15day:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Ski Index - Daypart - 15 Day
       description: >-
         The Ski Index provides indices of ski conditions due to weather. <br
@@ -1404,7 +1439,7 @@ paths:
   /v2/indices/static/daypart/15day:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Static Index - Daypart - 15 Day
       description: >-
         The Static Electricity Index provides indices indicating the potential
@@ -1422,7 +1457,7 @@ paths:
   /v2/indices/uv/current:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: UV Index - Current Conditions
       description: >-
         The UV Index provides indices of the intensity of the solar radiation
@@ -1440,7 +1475,7 @@ paths:
   /v2/indices/uv/daypart/15day:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: UV Index - Daypart - 15 Day
       description: >-
         The UV Index provides indices of the intensity of the solar radiation
@@ -1458,7 +1493,7 @@ paths:
   /v2/indices/uv/hourly/360hour:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: UV Index - Hourly - 15 Day
       description: >-
         The UV Index provides indices of the intensity of the solar radiation
@@ -1476,7 +1511,7 @@ paths:
   /v2/indices/wateringNeeds/daypart/15day:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Watering Needs Index - Daypart - 15 Day
       description: >-
         The Watering Needs  index indicates the weather’s influence on the need
@@ -1494,7 +1529,7 @@ paths:
   /v2/indices/powerDisruption/daypart/15day:
     get:
       tags:
-        - Core
+        - Lifestyle
       summary: Power Disruption Index - Daypart - 15 Day
       description: >-
         The Power Disruption index provides indices indicating the potential for
@@ -1512,7 +1547,7 @@ paths:
   /v2/stormreports:
     get:
       tags:
-        - Core
+        - Alerts
       summary: Local Storm Reports
       description: >-
         The Local Storm Report API provides short text reports of observed
@@ -1538,8 +1573,7 @@ paths:
   /v3/location/search:
     get:
       tags:
-        - Core
-        - Location Services
+        - Utility
       summary: Location Search
       description: >-
         The Location Service API provides the ability to lookup a location name
@@ -1560,8 +1594,7 @@ paths:
   /v3/location/point:
     get:
       tags:
-        - Core
-        - Location Services
+        - Utility
       summary: Location Search
       description: >-
         The Location Service API provides the ability to lookup a location name
@@ -1583,7 +1616,6 @@ paths:
   /v3/TileServer/series/productSet/PPAcore:
     get:
       tags:
-        - Core
         - Weather Imagery
       summary: Inventory Series List
       description: >-
@@ -1604,7 +1636,6 @@ paths:
   '/v3/TileServer/tile/{layer}':
     get:
       tags:
-        - Core
         - Weather Imagery
       summary: Inventory Series List
       description: >-
@@ -1630,7 +1661,7 @@ paths:
   /v3/wx/hod/reanalysis/historical/point:
     get:
       tags:
-        - Core
+        - Observations
       summary: History on Demand - Reanalysis
       description: >-
         History on Demand (HOD) contains a broad set of worldwide, hourly,
@@ -1667,7 +1698,7 @@ paths:
   /v3/wx/hod/reanalysis/historical/boundary:
     get:
       tags:
-        - Core
+        - Observations
       summary: History on Demand - Reanalysis
       description: >-
         History on Demand (HOD) contains a broad set of worldwide, hourly,
