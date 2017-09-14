@@ -550,6 +550,7 @@ paths:
         - $ref: '#/parameters/longitudePath'
         - $ref: '#/parameters/startDateQuery'
         - $ref: '#/parameters/endDateQuery'
+        - $ref: '#/parameters/languageCodeQuery'
         - $ref: '#/parameters/unitsQuery'
       responses:
         '200':
