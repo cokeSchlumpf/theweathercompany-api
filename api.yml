@@ -8,10 +8,8 @@ info:
     platforms. The Enterprise Data Platform has been architected from the
     beginning with extreme scale and performance as key factors of success and
     is automatically scales to deliver tens of Billions average daily requests
-    with extremely low latency.
-    <br /><br />
-    More details can be found in the official documentation:
-    <ul>
+    with extremely low latency. <br /><br /> More details can be found in the
+    official documentation: <ul>
       <li><b>Overview:</b> https://goo.gl/B8g4Y1</li>
       <li><b>Common Usage Guide:</b> https://goo.gl/xDJKPE</li>
     </ul>
@@ -61,9 +59,8 @@ paths:
         This API also returns non-weather alerts such as Child Abduction
         Emergency and Law Enforcement Warnings.  The Alert Headlines API also
         provides a key value found in the <detailKey> attribute to access the
-        alert details in the Alert Details API.
-        <br /><br />
-        For more details please visit Documentation - https://goo.gl/C6Q6dC.
+        alert details in the Alert Details API. <br /><br /> For more details
+        please visit Documentation - https://goo.gl/C6Q6dC.
       produces:
         - application/json
       parameters:
@@ -96,9 +93,8 @@ paths:
         alert details in the Alert Details API. <br /> Your application should
         first call the Weather Alert Headlines API and use the value found in
         the <detailKey> attribute to request the detailed information found in
-        the Weather Alert Details API.
-        <br /><br />
-        For more details please visit Documentation - https://goo.gl/wkZXZF.
+        the Weather Alert Details API. <br /><br /> For more details please
+        visit Documentation - https://goo.gl/wkZXZF.
       produces:
         - application/json
       parameters:
@@ -137,8 +133,8 @@ paths:
 
         The data values in this API are correctly populated into Day, Night, or
         24-hour temporal segments. These segments are separate objects in the
-        response. <br /><br />
-        For more details please visit Documentation - https://goo.gl/H3Ijuj.
+        response. <br /><br /> For more details please visit Documentation -
+        https://goo.gl/H3Ijuj.
       parameters:
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
@@ -165,8 +161,8 @@ paths:
         /> **Understanding Intraday Forecasts**
 
         The Intraday Forecast product breaks down the days forecasts into (four)
-        6-hour segments for each of the included days. <br /><br />
-        For more details please visit Documentation - https://goo.gl/ZzU2cb
+        6-hour segments for each of the included days. <br /><br /> For more
+        details please visit Documentation - https://goo.gl/ZzU2cb
       parameters:
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
@@ -261,19 +257,20 @@ paths:
         The  Precipitation Events Forecast API provides a weather forecast for
         precipitation events(rain, snow, sleet, freezing rain) onset and offset
         times for 28 time steps over the next 7 hours. <br /><br />
-        <b>Understanding the Precipitation Forecast</b> <br /><br /> <b>Forecast
-        Composition</b><br /> <ol>
+        <b>Understanding the Precipitation Forecast</b> <br /><br />
+        <b><p>Forecast Composition</p></b><br /> <ol>
           <li>
-            The Precipitation Events Forecast (aka "onset/offset", aka "precip events") is the summary "events" of the raw 15-minute data. In practice 24 time steps are almost never returned. There is often only 1 event (e.g., "dry through the entire 6hr period"). However, there will always be at least one event returned. While the theoretical maximum is 24 events, in practice it rarely goes above 10-12 events.
+            <p>The Precipitation Events Forecast (aka "onset/offset", aka "precip events") is the summary "events" of the raw 15-minute data. In practice 24 time steps are almost never returned. There is often only 1 event (e.g., "dry through the entire 6hr period"). However, there will always be at least one event returned. While the theoretical maximum is 24 events, in practice it rarely goes above 10-12 events.</p>
           </li>
           <li>
-            During a 6 hour period if the weather changes from dry to cloudy to rain or snow then you have a record for each part with start time and end time. Unlike like hourly  or other time sliced forecast that are based on time period. This forecast is based on weather events and not on time.
+            <p>During a 6 hour period if the weather changes from dry to cloudy to rain or snow then you have a record for each part with start time and end time. Unlike like hourly  or other time sliced forecast that are based on time period. This forecast is based on weather events and not on time.</p>
           </li>
-        </ol> <b>Forecast Implementation</b><br /> To request and display the
+        </ol><p> <b>Forecast Implementation</b><br /> To request and display the
         Precipitation Events product. You need not pass a parameter to select an
         hour or day. Each request will return the full precipitation events for
         the next 6 hours. <br /><br /> For more details please visit
-        Documentation - https://goo.gl/9qJBpN.
+        Documentation - <a
+        href=https://goo.gl/9qJBpN>https://goo.gl/9qJBpN</a><p>
       parameters:
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
