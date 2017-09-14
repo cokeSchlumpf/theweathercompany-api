@@ -930,7 +930,7 @@ paths:
       responses:
         '200':
           description: 'Please see documentation for details:https://goo.gl/1RWzPl'
-  '/v1/location/{location}/observations/airquality.json':
+  '/v1/location/{location}/airquality.json':
     get:
       tags:
         - By Location
@@ -942,13 +942,13 @@ paths:
         /> For more details please visit Documentation - https://goo.gl/ANMHWX.
       parameters:
         - $ref: '#/parameters/locationPath'
-        - $ref: '#/parameters/unitsQuery'
+        - $ref: '#/parameters/languageCodeQuery'
       responses:
         '200':
           description: 'Please see documentation for details: https://goo.gl/ANMHWX'
         '401':
           description: Unauthorized. Please enter API key using the Authorize Button.
-  '/v1/location/{location}/observations/airquality/historical.json':
+  '/v1/location/{location}/airquality/historical.json':
     get:
       tags:
         - By Location
@@ -964,13 +964,15 @@ paths:
         https://goo.gl/tYO4Jx.
       parameters:
         - $ref: '#/parameters/locationPath'
-        - $ref: '#/parameters/unitsQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+        - $ref: '#/parameters/startDateQuery'
+        - $ref: '#/parameters/endDateQuery'
       responses:
         '200':
           description: 'Please see documentation for details: https://goo.gl/tYO4Jx'
         '401':
           description: Unauthorized. Please enter API key using the Authorize Button.
-  '/v1/location/{location}/observations/summary/historical.json':
+  '/v1/location/{location}/airquality/summary.json':
     get:
       tags:
         - By Location
@@ -986,7 +988,9 @@ paths:
         https://goo.gl/AyJQ0B.
       parameters:
         - $ref: '#/parameters/locationPath'
-        - $ref: '#/parameters/unitsQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+        - $ref: '#/parameters/startDateQuery'
+        - $ref: '#/parameters/endDateQuery'
       responses:
         '200':
           description: 'Please see documentation for details: https://goo.gl/AyJQ0B'
@@ -1100,6 +1104,8 @@ paths:
         details please visit Documentation - https://goo.gl/KuhH6i.
       parameters:
         - $ref: '#/parameters/locationPath'
+        - $ref: '#/parameters/startDateQuery'
+        - $ref: '#/parameters/endDateQuery'
         - $ref: '#/parameters/unitsQuery'
       responses:
         '200':
