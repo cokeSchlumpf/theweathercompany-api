@@ -612,6 +612,8 @@ paths:
       parameters:
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
+        - $ref: '#/parameters/startDateQuery'
+        - $ref: '#/parameters/endDateQuery'
         - $ref: '#/parameters/unitsQuery'
       responses:
         '200':
