@@ -452,7 +452,7 @@ paths:
           description: 'Please see documentation for details: https://goo.gl/ANMHWX'
         '401':
           description: Unauthorized. Please enter API key using the Authorize Button.
-  '/v1/geocode/{latitude}/{longitude}/observations/airquality/historical.json':
+  '/v1/geocode/{latitude}/{longitude}/airquality/historical.json':
     get:
       tags:
         - By Geocode
@@ -469,7 +469,9 @@ paths:
       parameters:
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
-        - $ref: '#/parameters/unitsQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+        - $ref: '#/parameters/startDateQuery'
+        - $ref: '#/parameters/endDateQuery'
       responses:
         '200':
           description: 'Please see documentation for details: https://goo.gl/tYO4Jx'
@@ -1841,6 +1843,7 @@ parameters:
     description: The start date in the format YYYYMMDD
     in: query
     type: string
+    default: 20161020
     required: true
   endDateTimeQuery:
     name: endDateTime
@@ -2028,6 +2031,7 @@ parameters:
     description: The start date in the format YYYYMMDD
     in: query
     type: string
+    default: 20161001
     required: true
   startDateTimeQuery:
     name: startDateTime
