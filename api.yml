@@ -477,7 +477,7 @@ paths:
           description: 'Please see documentation for details: https://goo.gl/tYO4Jx'
         '401':
           description: Unauthorized. Please enter API key using the Authorize Button.
-  '/v1/geocode/{latitude}/{longitude}/observations/summary/historical.json':
+  '/v1/geocode/{latitude}/{longitude}/airquality/summary.json':
     get:
       tags:
         - By Geocode
@@ -494,7 +494,9 @@ paths:
       parameters:
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
-        - $ref: '#/parameters/unitsQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+        - $ref: '#/parameters/startDateQuery'
+        - $ref: '#/parameters/endDateQuery'
       responses:
         '200':
           description: 'Please see documentation for details: https://goo.gl/AyJQ0B'
