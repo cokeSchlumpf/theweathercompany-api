@@ -543,7 +543,10 @@ paths:
         hours, etc. Some stations do not report during nighttime hours. <br
         /><br /> Please Note that minimum and maximum temperature values are
         often null. The National Weather Service in the U.S. did not begin to
-        provide these elements until recent years. <br /><br /> For more details
+        provide these elements until recent years. 
+        <br></br>
+        <b>Please note that Hackathon API Key is not authorized to access this endpoint, however if you are interested you can contact the IBM Booth.</b>
+        <br /><br /> For more details
         please visit Documentation - https://goo.gl/auOfXL.
       parameters:
         - $ref: '#/parameters/latitudePath'
@@ -1030,7 +1033,9 @@ paths:
         hours, etc. Some stations do not report during nighttime hours. <br
         /><br /> Please Note that minimum and maximum temperature values are
         often null. The National Weather Service in the U.S. did not begin to
-        provide these elements until recent years. <br /><br /> For more details
+        provide these elements until recent years. 
+        <br></br>
+        <b>Please note that Hackathon API Key is not authorized to access this endpoint, however if you are interested you can contact the IBM Booth.</b><br /><br /> For more details
         please visit Documentation - https://goo.gl/auOfXL.
       parameters:
         - $ref: '#/parameters/locationPath'
