@@ -649,7 +649,7 @@ paths:
         The data values in this API are correctly populated into Day, Night, or
         24-hour temporal segments. These segments are separate objects in the
         response. <br /><br /> For more details please visit Documentation -
-        TODO.
+        https://goo.gl/H3Ijuj.
       parameters:
         - $ref: '#/parameters/locationPath'
         - $ref: '#/parameters/daysPath'
@@ -674,7 +674,7 @@ paths:
 
         The Intraday Forecast product breaks down the days forecasts into (four)
         6-hour segments for each of the included days. <br /><br /> For more
-        details please visit Documentation - TODO.
+        details please visit Documentation - https://goo.gl/ZzU2cb.
       parameters:
         - $ref: '#/parameters/locationPath'
         - $ref: '#/parameters/daysPath'
@@ -1856,7 +1856,7 @@ parameters:
     type: integer
   endDateQuery:
     name: endDate
-    description: The start date in the format YYYYMMDD
+    description: The end date in the format YYYYMMDD
     in: query
     type: string
     default: 20161020
