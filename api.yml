@@ -433,7 +433,7 @@ paths:
       responses:
         '200':
           description: 'Please see documentation for details:https://goo.gl/1RWzPl'
-  '/v1/geocode/{latitude}/{longitude}/observations/airquality.json':
+  '/v1/geocode/{latitude}/{longitude}/airquality.json':
     get:
       tags:
         - By Geocode
@@ -446,7 +446,7 @@ paths:
       parameters:
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
-        - $ref: '#/parameters/unitsQuery'
+        - $ref: '#/parameters/languageCodeQuery'
       responses:
         '200':
           description: 'Please see documentation for details: https://goo.gl/ANMHWX'
