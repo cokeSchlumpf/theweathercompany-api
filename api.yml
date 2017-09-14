@@ -1552,7 +1552,10 @@ paths:
       summary: Power Disruption Index - Daypart - 15 Day
       description: >-
         The Power Disruption index provides indices indicating the potential for
-        power disruptions due to weather. <br /><br /> For more details please
+        power disruptions due to weather. 
+        <br></br>
+        <b>Please note that Hackathon API Key is not authorized to access this endpoint, however if you are interested you can contact the IBM Booth.</b>
+        <br /><br /> For more details please
         visit Documentation - https://goo.gl/tv4B3f
       parameters:
         - $ref: '#/parameters/geocodeQuery'
@@ -1578,7 +1581,10 @@ paths:
         has received all the data and is done. If next_batch is not null the
         user will make an additional call - the ‘next’ parameter will be set
         equal to the value found in ‘next_batch’. Keep calling the API until
-        next_batch equals null. <br /><br /> For more details please visit
+        next_batch equals null. 
+        <br></br>
+        <b>Please note that Hackathon API Key is not authorized to access this endpoint, however if you are interested you can contact the IBM Booth.</b>
+        <br /><br /> For more details please visit
         Documentation - https://goo.gl/uLpaOj
       parameters:
         - $ref: '#/parameters/geoidQuery'
