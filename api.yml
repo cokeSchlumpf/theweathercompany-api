@@ -10,9 +10,12 @@ info:
     is automatically scales to deliver tens of Billions average daily requests
     with extremely low latency. <br /><br /> More details can be found in the
     official documentation: <ul>
-      <li><b>Overview:</b> https://goo.gl/B8g4Y1</li>
-      <li><b>Common Usage Guide:</b> https://goo.gl/xDJKPE</li>
+      <li><b>Overview:</b> <a href="https://goo.gl/B8g4Y1" target="_blank">https://goo.gl/B8g4Y1</a></li>
+      <li><b>Common Usage Guide:</b> <a href="https://goo.gl/xDJKPE" target="_blank">https://goo.gl/xDJKPE</a></li>
     </ul>
+    You can use the following API Key for the whole Hackathon. The Key will be disabled after the Hackathon - If you need more time after the Hackathon to use the API, contact us at the IBM Booth.
+    <br /><br />
+    <b>626505b9091f4982a505b9091f798235</b>
   version: HackZurich
   title: The Weather Company Data APIs
   contact:
@@ -1762,6 +1765,7 @@ securityDefinitions:
     type: apiKey
     in: query
     name: apiKey
+    default: 626505b9091f4982a505b9091f798235
 parameters:
   adminDistrictQuery:
     name: adminDistrictCode
