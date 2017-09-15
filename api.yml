@@ -67,6 +67,7 @@ paths:
       produces:
         - application/json
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/countryCode'
         - $ref: '#/parameters/languageCodeQuery'
       responses:
@@ -139,6 +140,7 @@ paths:
         response. <br /><br /> For more details please visit Documentation -
         https://goo.gl/H3Ijuj.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
         - $ref: '#/parameters/daysPath'
@@ -167,6 +169,7 @@ paths:
         6-hour segments for each of the included days. <br /><br /> For more
         details please visit Documentation - https://goo.gl/ZzU2cb
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
         - $ref: '#/parameters/daysPath'
@@ -191,6 +194,7 @@ paths:
         later in this document for more details.  <br /><br /> For more details
         please visit Documentation - https://goo.gl/yCt3Ju.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
         - $ref: '#/parameters/unitsQuery'
@@ -221,6 +225,7 @@ paths:
         request will return the full 15 Minute Forecast. <br /><br /> For more
         details please visit Documentation - https://goo.gl/nb5XUx.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
         - $ref: '#/parameters/unitsQuery'
@@ -242,6 +247,7 @@ paths:
         later in this document for more details.  <br /><br /> For more details
         please visit Documentation - https://goo.gl/G65500.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
         - $ref: '#/parameters/unitsQuery'
@@ -275,6 +281,7 @@ paths:
         Documentation - <a
         href=https://goo.gl/9qJBpN>https://goo.gl/9qJBpN</a><p>
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
         - $ref: '#/parameters/unitsQuery'
@@ -297,6 +304,7 @@ paths:
         times for 28 time steps over the next 7 hours.   <br /><br /> For more
         details please visit Documentation - https://goo.gl/NaT8SG
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
         - $ref: '#/parameters/unitsQuery'
@@ -319,6 +327,7 @@ paths:
         and provided by the National Climatic Data Center (NCDC). <br /><br />
         For more details please visit Documentation - https://goo.gl/1zKfVs.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
         - $ref: '#/parameters/unitsQuery'
@@ -341,6 +350,7 @@ paths:
         and provided by the National Climatic Data Center (NCDC). <br /><br />
         For more details please visit Documentation - https://goo.gl/wGMn6w.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
         - $ref: '#/parameters/unitsQuery'
@@ -385,6 +395,7 @@ paths:
         <br /><br /> For more details please visit Documentation -
         https://goo.gl/vycisA.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
         - $ref: '#/parameters/unitsQuery'
@@ -429,6 +440,7 @@ paths:
         more than once an hour. <br /><br /> For more details please visit
         Documentation - https://goo.gl/1RWzPl.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
         - $ref: '#/parameters/unitsQuery'
@@ -447,6 +459,7 @@ paths:
         pollutant indices and levels, and ozone action day phrases.  <br /><br
         /> For more details please visit Documentation - https://goo.gl/ANMHWX.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
         - $ref: '#/parameters/languageCodeQuery'
@@ -470,6 +483,7 @@ paths:
         /><br /> For more details please visit Documentation -
         https://goo.gl/tYO4Jx.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
         - $ref: '#/parameters/languageCodeQuery'
@@ -495,6 +509,7 @@ paths:
         /><br /> For more details please visit Documentation -
         https://goo.gl/AyJQ0B.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
         - $ref: '#/parameters/languageCodeQuery'
@@ -552,6 +567,7 @@ paths:
         <br /><br /> For more details
         please visit Documentation - https://goo.gl/auOfXL.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
         - $ref: '#/parameters/startDateQuery'
@@ -591,6 +607,7 @@ paths:
         state/territory. <br /><br /> For more details please visit
         Documentation - https://goo.gl/8vYB6N.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
         - $ref: '#/parameters/unitsQuery'
@@ -616,6 +633,7 @@ paths:
         Oceanic and Atmospheric Association (NOAA). <br /><br /> For more
         details please visit Documentation - https://goo.gl/KuhH6i.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/latitudePath'
         - $ref: '#/parameters/longitudePath'
         - $ref: '#/parameters/startDateQuery'
@@ -654,6 +672,7 @@ paths:
         response. <br /><br /> For more details please visit Documentation -
         https://goo.gl/H3Ijuj.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/locationPath'
         - $ref: '#/parameters/daysPath'
         - $ref: '#/parameters/unitsQuery'
@@ -679,6 +698,7 @@ paths:
         6-hour segments for each of the included days. <br /><br /> For more
         details please visit Documentation - https://goo.gl/ZzU2cb.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/locationPath'
         - $ref: '#/parameters/daysPath'
         - $ref: '#/parameters/unitsQuery'
@@ -700,6 +720,7 @@ paths:
         later in this document for more details.  <br /><br /> For more details
         please visit Documentation - https://goo.gl/yCt3Ju.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/locationPath'
         - $ref: '#/parameters/unitsQuery'
       responses:
@@ -727,6 +748,7 @@ paths:
         request will return the full 15 Minute Forecast. <br /><br /> For more
         details please visit Documentation - https://goo.gl/nb5XUx.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/locationPath'
         - $ref: '#/parameters/unitsQuery'
       responses:
@@ -747,6 +769,7 @@ paths:
         later in this document for more details.  <br /><br /> For more details
         please visit Documentation - https://goo.gl/G65500.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/locationPath'
         - $ref: '#/parameters/unitsQuery'
       responses:
@@ -778,6 +801,7 @@ paths:
         the next 6 hours. <br /><br /> For more details please visit
         Documentation - <a href=https://goo.gl/9qJBpN>https://goo.gl/9qJBpN</a>.</p>
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/locationPath'
         - $ref: '#/parameters/unitsQuery'
       responses:
@@ -799,6 +823,7 @@ paths:
         times for 28 time steps over the next 7 hours.   <br /><br /> For more
         details please visit Documentation - https://goo.gl/NaT8SG
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/locationPath'
         - $ref: '#/parameters/unitsQuery'
       responses:
@@ -820,6 +845,7 @@ paths:
         and provided by the National Climatic Data Center (NCDC). <br /><br />
         For more details please visit Documentation - https://goo.gl/1zKfVs.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/locationPath'
         - $ref: '#/parameters/unitsQuery'
         - $ref: '#/parameters/startQuery'
@@ -841,6 +867,7 @@ paths:
         and provided by the National Climatic Data Center (NCDC). <br /><br />
         For more details please visit Documentation - https://goo.gl/wGMn6w.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/locationPath'
         - $ref: '#/parameters/unitsQuery'
         - $ref: '#/parameters/startMonthQuery'
@@ -884,6 +911,7 @@ paths:
         <br /><br /> For more details please visit Documentation -
         https://goo.gl/vycisA.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/locationPath'
         - $ref: '#/parameters/unitsQuery'
       responses:
@@ -927,6 +955,7 @@ paths:
         more than once an hour. <br /><br /> For more details please visit
         Documentation - https://goo.gl/1RWzPl.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/locationPath'
         - $ref: '#/parameters/unitsQuery'
         - $ref: '#/parameters/hoursQuery'
@@ -944,6 +973,7 @@ paths:
         pollutant indices and levels, and ozone action day phrases.  <br /><br
         /> For more details please visit Documentation - https://goo.gl/ANMHWX.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/locationPath'
         - $ref: '#/parameters/languageCodeQuery'
       responses:
@@ -966,6 +996,7 @@ paths:
         /><br /> For more details please visit Documentation -
         https://goo.gl/tYO4Jx.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/locationPath'
         - $ref: '#/parameters/languageCodeQuery'
         - $ref: '#/parameters/startDateQuery'
@@ -990,6 +1021,7 @@ paths:
         /><br /> For more details please visit Documentation -
         https://goo.gl/AyJQ0B.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/locationPath'
         - $ref: '#/parameters/languageCodeQuery'
         - $ref: '#/parameters/startDateQuery'
@@ -1045,6 +1077,7 @@ paths:
         <b>Please note that Hackathon API Key is not authorized to access this endpoint, however if you are interested you can contact the IBM Booth.</b><br /><br /> For more details
         please visit Documentation - https://goo.gl/auOfXL.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/locationPath'
         - $ref: '#/parameters/startDateQuery'
         - $ref: '#/parameters/endDateQuery'
@@ -1082,6 +1115,7 @@ paths:
         state/territory. <br /><br /> For more details please visit
         Documentation - https://goo.gl/8vYB6N.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/locationPath'
         - $ref: '#/parameters/unitsQuery'
       responses:
@@ -1106,6 +1140,7 @@ paths:
         Oceanic and Atmospheric Association (NOAA). <br /><br /> For more
         details please visit Documentation - https://goo.gl/KuhH6i.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/locationPath'
         - $ref: '#/parameters/startDateQuery'
         - $ref: '#/parameters/endDateQuery'
@@ -1125,6 +1160,7 @@ paths:
         individual's potential to feel aches and pains. <br /><br /> For more
         details please visit Documentation - https://goo.gl/PvD1Fe.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1143,6 +1179,7 @@ paths:
         breath for respiratory-sensitive individuals. <br /><br /> For more
         details please visit Documentation - https://goo.gl/4boRly.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1161,6 +1198,7 @@ paths:
         growing degree days, and heating degree days. <br /><br /> For more
         details please visit Documentation - https://goo.gl/2FPKtA.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1179,6 +1217,7 @@ paths:
         road weather conditions. <br /><br /> For more details please visit
         Documentation - https://goo.gl/pnbdhL.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1197,6 +1236,7 @@ paths:
         road weather conditions. <br /><br /> For more details please visit
         Documentation - https://goo.gl/1CW2R7
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1215,6 +1255,7 @@ paths:
         road weather conditions. <br /><br /> For more details please visit
         Documentation - https://goo.gl/64lnCp
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1233,6 +1274,7 @@ paths:
         will experience dry skin based on weather conditions. <br /><br /> For
         more details please visit Documentation - https://goo.gl/TU7136
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1251,6 +1293,7 @@ paths:
         will experience frizzy hair based on weather conditions. <br /><br />
         For more details please visit Documentation - https://goo.gl/OAbjdE
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1269,6 +1312,7 @@ paths:
         Frost. <br /><br /> For more details please visit Documentation -
         https://goo.gl/VJExYp
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1287,6 +1331,7 @@ paths:
         /><br /> For more details please visit Documentation -
         https://goo.gl/Lg7kJY
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1305,6 +1350,7 @@ paths:
         /><br /> For more details please visit Documentation -
         https://goo.gl/pWnkco
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1324,6 +1370,7 @@ paths:
         temperature, based on weather conditions. <br /><br /> For more details
         please visit Documentation - https://goo.gl/D2ugV6
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1342,6 +1389,7 @@ paths:
         sightseeing conditions due to weather. <br /><br /> For more details
         please visit Documentation - https://goo.gl/AwIptI
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1360,6 +1408,7 @@ paths:
         sightseeing conditions due to weather. <br /><br /> For more details
         please visit Documentation - https://goo.gl/mPjTmZ
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1378,6 +1427,7 @@ paths:
         mosquitoes based on weather conditions.  <br /><br /> For more details
         please visit Documentation - https://goo.gl/xwcSc5
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1396,6 +1446,7 @@ paths:
         pollen. <br /><br /> For more details please visit Documentation -
         https://goo.gl/xu4oBU
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1414,6 +1465,7 @@ paths:
         due to weather - for short, and long runs. <br /><br /> For more details
         please visit Documentation - https://goo.gl/0vP6q9
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1432,6 +1484,7 @@ paths:
         due to weather - for short, and long runs. <br /><br /> For more details
         please visit Documentation - https://goo.gl/krP8FV
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1450,6 +1503,7 @@ paths:
         /><br /> For more details please visit Documentation -
         https://goo.gl/LnAqFI
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1468,6 +1522,7 @@ paths:
         for static electricity based on weather conditions. <br /><br /> For
         more details please visit Documentation - https://goo.gl/Sw4WP3
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1486,6 +1541,7 @@ paths:
         level and risk of skin damage due to exposure. <br /><br /> For more
         details please visit Documentation - https://goo.gl/7hJ0Q3
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1504,6 +1560,7 @@ paths:
         level and risk of skin damage due to exposure. <br /><br /> For more
         details please visit Documentation - https://goo.gl/8kVQWX
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1522,6 +1579,7 @@ paths:
         level and risk of skin damage due to exposure. <br /><br /> For more
         details please visit Documentation - https://goo.gl/xXE969
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1540,6 +1598,7 @@ paths:
         to water your lawn or garden. <br /><br /> For more details please visit
         Documentation - https://goo.gl/He2ymz
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1561,6 +1620,7 @@ paths:
         <br /><br /> For more details please
         visit Documentation - https://goo.gl/tv4B3f
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/formatQuery'
         - $ref: '#/parameters/languageCodeQuery'
@@ -1590,6 +1650,7 @@ paths:
         <br /><br /> For more details please visit
         Documentation - https://goo.gl/uLpaOj
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geoidQuery'
         - $ref: '#/parameters/nextQuery'
         - $ref: '#/parameters/formatQuery'
@@ -1611,6 +1672,7 @@ paths:
         ICAO Code. <br /><br /> For more details please visit Documentation -
         https://goo.gl/l18rri.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/queryQuery'
         - $ref: '#/parameters/locationTypeQuery'
         - $ref: '#/parameters/adminDistrictQuery'
@@ -1632,6 +1694,7 @@ paths:
         ICAO Code. <br /><br /> For more details please visit Documentation -
         https://goo.gl/l18rri.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/postalCodeQuery'
         - $ref: '#/parameters/iataCodeQuery'
@@ -1679,6 +1742,7 @@ paths:
         schema.                      <br /><br /> For more details please visit
         Documentation - https://goo.gl/LXP7HM.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/layerPath'
         - $ref: '#/parameters/tsQuery'
         - $ref: '#/parameters/ftsQuery'
@@ -1714,6 +1778,7 @@ paths:
         </ul> <br /><br /> For more details please visit Documentation -
         https://goo.gl/b44JFF.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/pointTypeQuery'
         - $ref: '#/parameters/geocodeQuery'
         - $ref: '#/parameters/distanceQuery'
@@ -1751,6 +1816,7 @@ paths:
         </ul> <br /><br /> For more details please visit Documentation -
         https://goo.gl/b44JFF.
       parameters:
+        - $ref: '#/parameters/apiKeyQuery'
         - $ref: '#/parameters/boundaryTypeQuery'
         - $ref: '#/parameters/bboxQuery'
         - $ref: '#/parameters/verticesQuery'
@@ -1765,7 +1831,6 @@ securityDefinitions:
     type: apiKey
     in: query
     name: apiKey
-    default: 626505b9091f4982a505b9091f798235
 parameters:
   adminDistrictQuery:
     name: adminDistrictCode
@@ -1774,6 +1839,13 @@ parameters:
     description: The admin district of the location
     type: string
     required: false
+  apiKeyQuery:
+    name: apiKey
+    default: 626505b9091f4982a505b9091f798235
+    in: query
+    description: The API Key, only valid for HackZurich
+    type: string
+    required: true
   bboxQuery:
     name: bbox
     in: query
