@@ -1,0 +1,1497 @@
+swagger: '2.0'
+info:
+  description: |-
+    The Weather Company Data  APIs are served from our Enterprise Data Platform built upon the latest, most robust and globally distributed cloud technologies leveraging the core competence of our weather systems and next-generation globally distributed, highly available, low latency platforms. The Enterprise Data Platform has been architected from the beginning with extreme scale and performance as key factors of success and is automatically scales to deliver tens of Billions average daily requests with extremely low latency. <br /><br /> More details can be found in the official documentation: <ul>
+      <li><b>Overview:</b> <a href="https://goo.gl/B8g4Y1" target="_blank">https://goo.gl/B8g4Y1</a></li>
+      <li><b>Common Usage Guide:</b> <a href="https://goo.gl/xDJKPE" target="_blank">https://goo.gl/xDJKPE</a></li>
+    </ul> You can use the following API Key for the whole Hackathon. The Key will be disabled after the Hackathon - If you need more time after the Hackathon to use the API, contact us at the IBM Booth. <br /><br /> <b>x-ibm-client-id:</b> 7216b8fc-4815-43e4-bc20-1614e35aec09<br /> <b>x-ibm-client-secret:</b> iX0dP6tS0jA0tR6uR5yH6eO7pV6bS0fL4gW8mW6gI5kG8rU2nU
+  version: HackZurich
+  title: The Weather Company Data APIs
+  contact:
+    email: michael.wellner@de.ibm.com
+  x-ibm-name: the-weather-company-data-apis
+host: $(catalog.host)
+basePath: /weather
+tags:
+  - name: By Geocode
+    description: ''
+  - name: By Location
+    description: ''
+  - name: Alerts
+    description: ''
+  - name: Forecast
+    description: ''
+  - name: Lifestyle
+    description: ''
+  - name: Observations
+    description: ''
+  - name: Utility
+    description: ''
+  - name: Weather Imagery
+    description: ''
+schemes:
+  - https
+securityDefinitions:
+  clientIdHeader:
+    type: apiKey
+    in: header
+    name: X-IBM-Client-Id
+  clientSecretHeader:
+    in: header
+    name: X-IBM-Client-Secret
+    type: apiKey
+security:
+  - clientIdHeader: []
+    clientSecretHeader: []
+paths:
+  '/v1/country/{countryCode}/alerts.json':
+    get:
+      tags:
+        - Alerts
+      summary: Weather Alert Headlines
+      description: 'The Weather Alert Headlines API provides weather watches, warnings, statements and advisories issued by the NWS (National Weather Service), Environment Canada and MeteoAlarm. These weather alerts can provide crucial life-saving information. Weather alerts can be complicated and do not always follow consistent standards, format and rules. The Weather Channel (TWC) strives to ensure that the information is consistent from all of the different sources but the content is subject to change whenever there is an update from the authoritative source. <br /><br /> The Weather Alert Headline API returns active weather alert headlines related to Severe Thunderstorms, Tornadoes, Earthquakes, Floods, etc . This API also returns non-weather alerts such as Child Abduction Emergency and Law Enforcement Warnings.  The Alert Headlines API also provides a key value found in the <detailKey> attribute to access the alert details in the Alert Details API. <br /><br /> For more details please visit Documentation - https://goo.gl/C6Q6dC.'
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/countryCode'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/C6Q6dC'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/alert/{key}/details.json':
+    get:
+      tags:
+        - Alerts
+      summary: Weather Alert Details
+      description: 'The Weather Alert Details API provides weather watches, warnings, statements and advisories issued by the NWS (National Weather Service), Environment Canada and MeteoAlarm. These weather alerts can provide crucial life-saving information. Weather alerts can be complicated and do not always follow consistent standards, format and rules. The Weather Channel (TWC) strives to ensure that the information is consistent from all of the different sources but the content is subject to change whenever there is an update from the authoritative source. <br /><br /> The Weather Alert Headlines API returns active weather alert headlines related to Severe Thunderstorms, Tornadoes, Earthquakes, Floods, etc . This API also returns non-weather alerts such as Child Abduction Emergency and Law Enforcement Warnings.  The Alert Headlines API also provides a key value found in the <detailKey> attribute to access the alert details in the Alert Details API. <br /> Your application should first call the Weather Alert Headlines API and use the value found in the <detailKey> attribute to request the detailed information found in the Weather Alert Details API. <br /><br /> For more details please visit Documentation - https://goo.gl/wkZXZF.'
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: key
+          type: string
+          required: true
+          description: The key of the Alert - Retrieved via the Weather Alert Headlines API
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/wkZXZF'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/geocode/{latitude}/{longitude}/forecast/daily/{days}day.json':
+    get:
+      tags:
+        - By Geocode
+        - Forecast
+      summary: 'Daily Forecast (3-Day, 5-Day, 7-Day, 10-Day, 15-Day)'
+      description: |-
+        The Daily Forecast  API is sourced from the The Weather Company Forecast system.  This TWC API returns weather forecasts starting current day. Your content licensing agreement with TWC determines the number of days returned in the API response and is constrained by the API Key that is provided to your company.  Please refer to the Data Elements section later in this document for more details.  <br /><br /> **Forecast Composition**
+        The TWC daily forecast product can contain multiple days of daily forecasts for each location. Each day of a forecast can contain up to (3) "temporal segments" meaning three separate forecasts. For any given forecast day we offer day, night, and a 24-hour forecast (daily summary). Implementing our forecasts requires your applications to perform basic processing in order to properly ingest the forecast data feeds. <br /><br/> **Forecast Implementation**
+        The data values in this API are correctly populated into Day, Night, or 24-hour temporal segments. These segments are separate objects in the response. <br /><br /> For more details please visit Documentation - https://goo.gl/H3Ijuj.
+      parameters:
+        - $ref: '#/parameters/latitudePath'
+        - $ref: '#/parameters/longitudePath'
+        - $ref: '#/parameters/daysPath'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/H3Ijuj'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/geocode/{latitude}/{longitude}/forecast/intraday/{days}day.json':
+    get:
+      tags:
+        - By Geocode
+        - Forecast
+      summary: 'Intraday Forecast (3-Day, 5-Day, 7-Day, 10-Day, 15-Day)'
+      description: |-
+        The Intraday Forecast  API is sourced from the The Weather Company Forecast system. This TWC API returns weather forecasts in 6-hour periods starting current day. The 6-hour periods are Morning, Afternoon, Evening, and Overnight. Your content licensing agreement with TWC determines the number of days returned in the API response and is constrained by the API Key that is provided to your company.  <br /><br /> **Understanding Intraday Forecasts**
+        The Intraday Forecast product breaks down the days forecasts into (four) 6-hour segments for each of the included days. <br /><br /> For more details please visit Documentation - https://goo.gl/ZzU2cb
+      parameters:
+        - $ref: '#/parameters/latitudePath'
+        - $ref: '#/parameters/longitudePath'
+        - $ref: '#/parameters/daysPath'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/ZzU2cb'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/geocode/{latitude}/{longitude}/forecast/hourly/48hour.json':
+    get:
+      tags:
+        - By Geocode
+        - Forecast
+      summary: 2 Day Hourly Forecast
+      description: 'The Hourly Forecast  API is sourced from the The Weather Company Forecast system. This TWC API returns weather forecasts starting current day. Your content licensing agreement with TWC determines the number of days returned in the API response and is constrained by the API Key that is provided to your company.  Please refer to the Data Elements section later in this document for more details.  <br /><br /> For more details please visit Documentation - https://goo.gl/yCt3Ju.'
+      parameters:
+        - $ref: '#/parameters/latitudePath'
+        - $ref: '#/parameters/longitudePath'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/yCt3Ju'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/geocode/{latitude}/{longitude}/forecast/fifteenminute.json':
+    get:
+      tags:
+        - By Geocode
+        - Forecast
+      summary: 15 Minute Forecast
+      description: 'The short range 15 Minute Forecast API is sourced from the TWC Forecast system.  This API returns weather content consisting of forecasted weather for the next 15 minutes increment time steps out to 7 hours.  <br /><br /> <b>Understanding the 15-Minute Forecasts</b><br /> Implementing our forecasts requires your applications to perform basic processing in order to properly ingest the forecast data feeds. <br /><br /> <b>Forecast Composition</b><br /> The TWC 15 Minute forecast product can contain up to 28 short range forecasts for each location.  You should discard all previous hourly forecasts for a given forecast location when a new record is received. <br /><br /> <b>Forecast Implementation</b><br /> To request and display the 15 Minute Forecast product there is no need to pass a parameter to select an hour. Each request will return the full 15 Minute Forecast. <br /><br /> For more details please visit Documentation - https://goo.gl/nb5XUx.'
+      parameters:
+        - $ref: '#/parameters/latitudePath'
+        - $ref: '#/parameters/longitudePath'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details - https://goo.gl/nb5XUx'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/geocode/{latitude}/{longitude}/forecast/nowcast.json':
+    get:
+      tags:
+        - By Geocode
+        - Forecast
+      summary: Nowcast
+      description: 'The short range Nowcast Forecast API is sourced from the TWC Forecast system. This API provides a text summary of the weather forecast for the next 6 hour period for today. Please refer to the Data Elements section later in this document for more details.  <br /><br /> For more details please visit Documentation - https://goo.gl/G65500.'
+      parameters:
+        - $ref: '#/parameters/latitudePath'
+        - $ref: '#/parameters/longitudePath'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/G65500'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/geocode/{latitude}/{longitude}/forecast/precipitation.json':
+    get:
+      tags:
+        - By Geocode
+        - Forecast
+      summary: Precipitation Forecast
+      description: |-
+        The  Precipitation Events Forecast API provides a weather forecast for precipitation events(rain, snow, sleet, freezing rain) onset and offset times for 28 time steps over the next 7 hours. <br /><br /> <b>Understanding the Precipitation Forecast</b> <br /><br /> <b><p>Forecast Composition</p></b><br /> <ol>
+          <li>
+            <p>The Precipitation Events Forecast (aka "onset/offset", aka "precip events") is the summary "events" of the raw 15-minute data. In practice 24 time steps are almost never returned. There is often only 1 event (e.g., "dry through the entire 6hr period"). However, there will always be at least one event returned. While the theoretical maximum is 24 events, in practice it rarely goes above 10-12 events.</p>
+          </li>
+          <li>
+            <p>During a 6 hour period if the weather changes from dry to cloudy to rain or snow then you have a record for each part with start time and end time. Unlike like hourly  or other time sliced forecast that are based on time period. This forecast is based on weather events and not on time.</p>
+          </li>
+        </ol><p> <b>Forecast Implementation</b><br /> To request and display the Precipitation Events product. You need not pass a parameter to select an hour or day. Each request will return the full precipitation events for the next 6 hours. <br /><br /> For more details please visit Documentation - <a href=https://goo.gl/9qJBpN>https://goo.gl/9qJBpN</a><p>
+      parameters:
+        - $ref: '#/parameters/latitudePath'
+        - $ref: '#/parameters/longitudePath'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/9qJBpN'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/geocode/{latitude}/{longitude}/forecast/wwir.json':
+    get:
+      tags:
+        - By Geocode
+        - Forecast
+      summary: Precipitation Forecast
+      description: 'The When Will It Rain Forecast API provides a weather forecast over the next 6 hours based upon data from the Precipitation Events forecast. The Precipitation Events Forecast API provides a weather forecast for precipitation events (rain, snow, sleet, freezing rain) onset and offset times for 28 time steps over the next 7 hours.   <br /><br /> For more details please visit Documentation - https://goo.gl/NaT8SG'
+      parameters:
+        - $ref: '#/parameters/latitudePath'
+        - $ref: '#/parameters/longitudePath'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/NaT8SG'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/geocode/{latitude}/{longitude}/almanac/daily.json':
+    get:
+      tags:
+        - By Geocode
+        - Lifestyle
+      summary: Almanac Daily
+      description: 'The Almanac product provides the record high, record low, and average temperatures for a given location. The almanac information for this API is sourced from National Weather Service observations stations from a time period spanning 10 to 30 years or more. The information is gathered and provided by the National Climatic Data Center (NCDC). <br /><br /> For more details please visit Documentation - https://goo.gl/1zKfVs.'
+      parameters:
+        - $ref: '#/parameters/latitudePath'
+        - $ref: '#/parameters/longitudePath'
+        - $ref: '#/parameters/unitsQuery'
+        - $ref: '#/parameters/startQuery'
+        - $ref: '#/parameters/endQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/1zKfVs'
+  '/v1/geocode/{latitude}/{longitude}/almanac/monthly.json':
+    get:
+      tags:
+        - By Geocode
+        - Lifestyle
+      summary: Almanac Monthly
+      description: 'The Almanac product provides the record high, record low, and average temperatures for a given location. The almanac information for this API is sourced from National Weather Service observations stations from a time period spanning 10 to 30 years or more. The information is gathered and provided by the National Climatic Data Center (NCDC). <br /><br /> For more details please visit Documentation - https://goo.gl/wGMn6w.'
+      parameters:
+        - $ref: '#/parameters/latitudePath'
+        - $ref: '#/parameters/longitudePath'
+        - $ref: '#/parameters/unitsQuery'
+        - $ref: '#/parameters/startMonthQuery'
+        - $ref: '#/parameters/endMonthQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/wGMn6w'
+  '/v1/geocode/{latitude}/{longitude}/observations.json':
+    get:
+      tags:
+        - By Geocode
+        - Observations
+      summary: Site-Based Current Conditions
+      description: "Current Conditions are sourced from both physical site-based observation stations and synthetic weather observations produced by the TWC Currents system. This API returns the  latest weather observation for the location supplied to include current temperatures, winds, pressure and other observed weather information. Weather observations from physical devices deployed worldwide (weather data collected from METAR, SYNOP, BUOY, CMAN devices). <br /><br /> **Current Condition & Time-Series Data**\nAccess to retained site-based and synthetic data will be distributed on-demand in Current Conditions and Time Series data feeds.   These recent observations are retained in the primary TWC database up to 48 hours ( 2 days ) on specific reporting stations and nn hours of observations per station.  Observations per station within a 24 hour period varies due to station operation requirements (i.e. modified operating hours, number of observations recorded per hour, maintenance issues, etc).  <br /><br /> The recent observations data will be continuously updated and replaced with a first-in / first-out methodology, (rotating data with newest observation and moving the oldest observations to the archive storage) based on date/time stamping of the observations. The amount of data retained and available from any given station may be more than a single observation or more than 24 individual observation reports for any given station id. The number of observations is determined by the type of observation it is, i.e. NWS, etc. \n<br /><br /> For more details please visit Documentation - https://goo.gl/vycisA."
+      parameters:
+        - $ref: '#/parameters/latitudePath'
+        - $ref: '#/parameters/longitudePath'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/vycisA'
+  '/v1/geocode/{latitude}/{longitude}/observations/timeseries.json':
+    get:
+      tags:
+        - By Geocode
+        - Observations
+      summary: 'Time-Series Observations (Current & 24 Hours Past)'
+      description: |-
+        The Time-Series Observations returns the previous 24 hour period from the previous day up to the last reported current condition today. Current Conditions are sourced from both physical site-based observation stations and synthetic weather observations produced by the TWC Currents system. This API returns the  latest weather observation for the location supplied to include current temperatures, winds, pressure and other observed weather information. Weather observations from physical devices deployed worldwide (weather data collected from METAR, SYNOP, BUOY, CMAN devices), and the synthetic weather observations (TECCI) produced by the TWC Currents system. <br /><br /> **Current Condition & Time-Series Data**
+        Access to retained site-based and synthetic data will be distributed on-demand in Current Conditions and Time Series data feeds. Observations per station within a 24 hour period varies due to station operation requirements (i.e. modified operating hours, number of observations recorded per hour, maintenance issues, etc).  <br /><br /> The recent observations data will be continuously updated and replaced with a first-in / first-out methodology, (rotating data with newest observation and moving the oldest observations to the archive storage) based on date/time stamping of the observations. The amount of data retained and available from any given station may be more than a single observation or more than 24 individual observation reports for any given station id. The number of observations is determined by the type of observation reported i.e. NWS, etc.  <br /><br /> It is not to be assumed that data returned will be equal to the hours of past observations requested.  Example: 3 hours of past observations may not return just 3 observations. <br /><br /> Some reporting stations report observations more than once an hour. <br /><br /> For more details please visit Documentation - https://goo.gl/1RWzPl.
+      parameters:
+        - $ref: '#/parameters/latitudePath'
+        - $ref: '#/parameters/longitudePath'
+        - $ref: '#/parameters/unitsQuery'
+        - $ref: '#/parameters/hoursQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details:https://goo.gl/1RWzPl'
+  '/v1/geocode/{latitude}/{longitude}/airquality.json':
+    get:
+      tags:
+        - By Geocode
+        - Observations
+      summary: Air Quality - U.S.
+      description: 'The air quality data for the U.S. includes principal pollutants, pollutant indices and levels, and ozone action day phrases.  <br /><br /> For more details please visit Documentation - https://goo.gl/ANMHWX.'
+      parameters:
+        - $ref: '#/parameters/latitudePath'
+        - $ref: '#/parameters/longitudePath'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/ANMHWX'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/geocode/{latitude}/{longitude}/airquality/historical.json':
+    get:
+      tags:
+        - By Geocode
+        - Observations
+      summary: Air Quality - U.S. Historical
+      description: 'The air quality data for the U.S. includes principal pollutants, pollutant indices and levels, and ozone action day phrases.  The Historical U.S. Air Quality Daily Summary API returns historical daily maximum values for up to 31 days per location.  <br /><br /> **Note:**The current Historical Air Quality Archive begins July 2015 <br /><br /> For more details please visit Documentation - https://goo.gl/tYO4Jx.'
+      parameters:
+        - $ref: '#/parameters/latitudePath'
+        - $ref: '#/parameters/longitudePath'
+        - $ref: '#/parameters/languageCodeQuery'
+        - $ref: '#/parameters/startDateQuery'
+        - $ref: '#/parameters/endDateQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/tYO4Jx'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/geocode/{latitude}/{longitude}/airquality/summary.json':
+    get:
+      tags:
+        - By Geocode
+        - Observations
+      summary: Air Quality - U.S. Summary
+      description: 'The air quality data for the U.S. includes principal pollutants, pollutant indices and levels, and ozone action day phrases.  The Historical U.S. Air Quality Daily Summary API returns historical daily maximum values for up to 31 days per location.  <br /><br /> **Note:**The current Historical Air Quality Archive begins July 2015 <br /><br /> For more details please visit Documentation - https://goo.gl/AyJQ0B.'
+      parameters:
+        - $ref: '#/parameters/latitudePath'
+        - $ref: '#/parameters/longitudePath'
+        - $ref: '#/parameters/languageCodeQuery'
+        - $ref: '#/parameters/startDateQuery'
+        - $ref: '#/parameters/endDateQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/AyJQ0B'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/geocode/{latitude}/{longitude}/observations/historical.json':
+    get:
+      tags:
+        - By Geocode
+        - Observations
+      summary: Historical Site-Based Observations
+      description: 'Historical site-based observations are sourced from both physical site-based observation stations and synthetic weather observations produced by the TWC Currents system. This API returns the  latest weather observation for the location supplied to include current temperatures, winds, pressure and other observed weather information. Weather observations from physical devices deployed worldwide (weather data collected from METAR, SYNOP, BUOY, CMAN devices). <br /><br /> <b>Site-based Historical Observations</b><br /> Access to retained site-based and synthetic data will be distributed on-demand in historical data feeds. Past weather observations, up to one month (31 days max) of archived weather observation data for the location and date or daterange requested. <br /><br /> <b>Limitation:</b><br /> Archived observation data varies significantly by station and location. The earliest date of data recorded is from January 1931, but not all months from this time forward are available. Observations per station within a 24 hour period varies due to station operation requirements (i.e. modified operating hours, number of observations recorded per hour, maintenance issues, etc).  <br /><br /> <b>Historical Observations Data and Their Limitations</b><br /> Historical observations are “archived” and originate from METAR and SYNOP observation stations/devices. Although there is archived observation data dating back to January 1931 from some METAR stations, the available historical data is not contiguous for all months in a given year, for every year, and for all locations. Please be aware that there is a large volume of historical records that can be retrieved. However there are gaps in which a “no data found” message will be displayed for a period. When observation data is provided, it is recommended that processing rules be applied to ensure the desired ordering of the observations (oldest to newest, newest to oldest) using the observation date/time element in the feed. Reporting stations report weather observations at different intervals. Some observations are reported hourly, some every 3 hours, every 6 hours, etc. Some stations do not report during nighttime hours. <br /><br /> Please Note that minimum and maximum temperature values are often null. The National Weather Service in the U.S. did not begin to provide these elements until recent years.  <br></br> <b>Please note that Hackathon API Key is not authorized to access this endpoint, however if you are interested you can contact the IBM Booth.</b> <br /><br /> For more details please visit Documentation - https://goo.gl/auOfXL.'
+      parameters:
+        - $ref: '#/parameters/latitudePath'
+        - $ref: '#/parameters/longitudePath'
+        - $ref: '#/parameters/startDateQuery'
+        - $ref: '#/parameters/endDateQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/auOfXL'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/geocode/{latitude}/{longitude}/flu.json':
+    get:
+      tags:
+        - By Geocode
+        - Lifestyle
+      summary: U.S. Flu Outbreak
+      description: 'The Flu Outbreak API provides a color code and description of the geographic spread of influenza as assessed by state and territorial epidemiologists . Flu activity data is typically available at the end of every week during flu season (October - May) from the CDC in Atlanta, GA. Geography coverage is for United States including territories Guam (GU), Puerto Rico (PR), and Virgin Islands (VI). <br /><br /> <b>Understanding Flu Outbreak</b><br /> Implementing the Flu Outbreak data feed requires your application to perform iterative processing in order to properly ingest the weekly flu data set voluntarily reported by each state. Flu surveillance data collection is based on a reporting week that starts on Sunday and ends on Saturday of each week.  Each call returns a color/ flu activity description pair summarizing the flu activity for the prior week. <br /><br /> <b>Flu Outbreak Composition</b><br /> Summary of the Geographic Spread of Influenza (source: CDC.gov). State health departments report the estimated level of geographic spread of influenza activity in their states each week through the State and Territorial Epidemiologists Reports.  The Flu Activity element can have 1 of 5 values defined as follows for each US state/territory. <br /><br /> For more details please visit Documentation - https://goo.gl/8vYB6N.'
+      parameters:
+        - $ref: '#/parameters/latitudePath'
+        - $ref: '#/parameters/longitudePath'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/8vYB6N'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/geocode/{latitude}/{longitude}/forecast/tides.json':
+    get:
+      tags:
+        - By Geocode
+        - Lifestyle
+      summary: U.S. Tides
+      description: 'The U.S. Tides API returns marine tide predictions for up to the next 30 days for +3,000 coastal locations in United States and it territories. The tidal predictions are generated from harmonic or subordinate tide station/locations. Harmonic locations (also known as reference sites) are generated by regular water level reading sites. Subordinate locations predictions are derived by applying corrections to a reference tide station. This API uses the tide station IDs posted by National Oceanic and Atmospheric Association (NOAA). <br /><br /> For more details please visit Documentation - https://goo.gl/KuhH6i.'
+      parameters:
+        - $ref: '#/parameters/latitudePath'
+        - $ref: '#/parameters/longitudePath'
+        - $ref: '#/parameters/startDateQuery'
+        - $ref: '#/parameters/endDateQuery'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/KuhH6i'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/location/{location}/forecast/daily/{days}day.json':
+    get:
+      tags:
+        - By Location
+        - Forecast
+      summary: 'Daily Forecast (3-Day, 5-Day, 7-Day, 10-Day)'
+      description: |-
+        The Daily Forecast  API is sourced from the The Weather Company Forecast system.  This TWC API returns weather forecasts starting current day. Your content licensing agreement with TWC determines the number of days returned in the API response and is constrained by the API Key that is provided to your company.  Please refer to the Data Elements section later in this document for more details.  <br /><br /> **Forecast Composition**
+        The TWC daily forecast product can contain multiple days of daily forecasts for each location. Each day of a forecast can contain up to (3) "temporal segments" meaning three separate forecasts. For any given forecast day we offer day, night, and a 24-hour forecast (daily summary). Implementing our forecasts requires your applications to perform basic processing in order to properly ingest the forecast data feeds. <br /><br/> **Forecast Implementation**
+        The data values in this API are correctly populated into Day, Night, or 24-hour temporal segments. These segments are separate objects in the response. <br /><br /> For more details please visit Documentation - https://goo.gl/H3Ijuj.
+      parameters:
+        - $ref: '#/parameters/locationPath'
+        - $ref: '#/parameters/daysPath'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/H3Ijuj'
+  '/v1/location/{location}/forecast/intraday/{days}day.json':
+    get:
+      tags:
+        - By Location
+        - Forecast
+      summary: 'Intraday Forecast (3-Day, 5-Day, 7-Day, 10-Day, 15-Day)'
+      description: |-
+        The Intraday Forecast  API is sourced from the The Weather Company Forecast system. This TWC API returns weather forecasts in 6-hour periods starting current day. The 6-hour periods are Morning, Afternoon, Evening, and Overnight. Your content licensing agreement with TWC determines the number of days returned in the API response and is constrained by the API Key that is provided to your company.  <br /><br /> **Understanding Intraday Forecasts**
+        The Intraday Forecast product breaks down the days forecasts into (four) 6-hour segments for each of the included days. <br /><br /> For more details please visit Documentation - https://goo.gl/ZzU2cb.
+      parameters:
+        - $ref: '#/parameters/locationPath'
+        - $ref: '#/parameters/daysPath'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/ZzU2cb'
+  '/v1/location/{location}/forecast/hourly/48hour.json':
+    get:
+      tags:
+        - By Location
+        - Forecast
+      summary: 2 Day Hourly Forecast
+      description: 'The Hourly Forecast  API is sourced from the The Weather Company Forecast system. This TWC API returns weather forecasts starting current day. Your content licensing agreement with TWC determines the number of days returned in the API response and is constrained by the API Key that is provided to your company.  Please refer to the Data Elements section later in this document for more details.  <br /><br /> For more details please visit Documentation - https://goo.gl/yCt3Ju.'
+      parameters:
+        - $ref: '#/parameters/locationPath'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/yCt3Ju'
+  '/v1/location/{location}/forecast/fifteenminute.json':
+    get:
+      tags:
+        - By Location
+        - Forecast
+      summary: 15 Minute Forecast
+      description: 'The short range 15 Minute Forecast API is sourced from the TWC Forecast system.  This API returns weather content consisting of forecasted weather for the next 15 minutes increment time steps out to 7 hours.  <br /><br /> <b>Understanding the 15-Minute Forecasts</b><br /> Implementing our forecasts requires your applications to perform basic processing in order to properly ingest the forecast data feeds. <br /><br /> <b>Forecast Composition</b><br /> The TWC 15 Minute forecast product can contain up to 28 short range forecasts for each location.  You should discard all previous hourly forecasts for a given forecast location when a new record is received. <br /><br /> <b>Forecast Implementation</b><br /> To request and display the 15 Minute Forecast product there is no need to pass a parameter to select an hour. Each request will return the full 15 Minute Forecast. <br /><br /> For more details please visit Documentation - https://goo.gl/nb5XUx.'
+      parameters:
+        - $ref: '#/parameters/locationPath'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details - https://goo.gl/nb5XUx'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/location/{location}/forecast/nowcast.json':
+    get:
+      tags:
+        - By Location
+        - Forecast
+      summary: Nowcast
+      description: 'The short range Nowcast Forecast API is sourced from the TWC Forecast system. This API provides a text summary of the weather forecast for the next 6 hour period for today. Please refer to the Data Elements section later in this document for more details.  <br /><br /> For more details please visit Documentation - https://goo.gl/G65500.'
+      parameters:
+        - $ref: '#/parameters/locationPath'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/G65500'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/location/{location}/forecast/precipitation.json':
+    get:
+      tags:
+        - By Location
+        - Forecast
+      summary: Precipitation Forecast
+      description: |-
+        The  Precipitation Events Forecast API provides a weather forecast for precipitation events(rain, snow, sleet, freezing rain) onset and offset times for 28 time steps over the next 7 hours. <br /><br /> <b>Understanding the Precipitation Forecast</b> <br /><br /> <b><p>Forecast Composition</p></b><br /> <ol>
+          <li>
+            <p>The Precipitation Events Forecast (aka "onset/offset", aka "precip events") is the summary "events" of the raw 15-minute data. In practice 24 time steps are almost never returned. There is often only 1 event (e.g., "dry through the entire 6hr period"). However, there will always be at least one event returned. While the theoretical maximum is 24 events, in practice it rarely goes above 10-12 events.</p>
+          </li>
+          <li>
+            <p>During a 6 hour period if the weather changes from dry to cloudy to rain or snow then you have a record for each part with start time and end time. Unlike like hourly  or other time sliced forecast that are based on time period. This forecast is based on weather events and not on time.</p>
+          </li>
+        </ol> <p><b>Forecast Implementation</b><br /> To request and display the Precipitation Events product. You need not pass a parameter to select an hour or day. Each request will return the full precipitation events for the next 6 hours. <br /><br /> For more details please visit Documentation - <a href=https://goo.gl/9qJBpN>https://goo.gl/9qJBpN</a>.</p>
+      parameters:
+        - $ref: '#/parameters/locationPath'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/9qJBpN'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/location/{location}/forecast/wwir.json':
+    get:
+      tags:
+        - By Location
+        - Forecast
+      summary: Precipitation Forecast
+      description: 'The When Will It Rain Forecast API provides a weather forecast over the next 6 hours based upon data from the Precipitation Events forecast. The Precipitation Events Forecast API provides a weather forecast for precipitation events (rain, snow, sleet, freezing rain) onset and offset times for 28 time steps over the next 7 hours.   <br /><br /> For more details please visit Documentation - https://goo.gl/NaT8SG'
+      parameters:
+        - $ref: '#/parameters/locationPath'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/NaT8SG'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/location/{location}/almanac/daily.json':
+    get:
+      tags:
+        - By Location
+        - Lifestyle
+      summary: Almanac Daily
+      description: 'The Almanac product provides the record high, record low, and average temperatures for a given location. The almanac information for this API is sourced from National Weather Service observations stations from a time period spanning 10 to 30 years or more. The information is gathered and provided by the National Climatic Data Center (NCDC). <br /><br /> For more details please visit Documentation - https://goo.gl/1zKfVs.'
+      parameters:
+        - $ref: '#/parameters/locationPath'
+        - $ref: '#/parameters/unitsQuery'
+        - $ref: '#/parameters/startQuery'
+        - $ref: '#/parameters/endQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/1zKfVs'
+  '/v1/location/{location}/almanac/monthly.json':
+    get:
+      tags:
+        - By Location
+        - Lifestyle
+      summary: Almanac Monthly
+      description: 'The Almanac product provides the record high, record low, and average temperatures for a given location. The almanac information for this API is sourced from National Weather Service observations stations from a time period spanning 10 to 30 years or more. The information is gathered and provided by the National Climatic Data Center (NCDC). <br /><br /> For more details please visit Documentation - https://goo.gl/wGMn6w.'
+      parameters:
+        - $ref: '#/parameters/locationPath'
+        - $ref: '#/parameters/unitsQuery'
+        - $ref: '#/parameters/startMonthQuery'
+        - $ref: '#/parameters/endMonthQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/wGMn6w'
+  '/v1/location/{location}/observations.json':
+    get:
+      tags:
+        - By Location
+        - Observations
+      summary: Site-Based Current Conditions
+      description: "Current Conditions are sourced from both physical site-based observation stations and synthetic weather observations produced by the TWC Currents system. This API returns the  latest weather observation for the location supplied to include current temperatures, winds, pressure and other observed weather information. Weather observations from physical devices deployed worldwide (weather data collected from METAR, SYNOP, BUOY, CMAN devices). <br /><br /> **Current Condition & Time-Series Data**\nAccess to retained site-based and synthetic data will be distributed on-demand in Current Conditions and Time Series data feeds.   These recent observations are retained in the primary TWC database up to 48 hours ( 2 days ) on specific reporting stations and nn hours of observations per station.  Observations per station within a 24 hour period varies due to station operation requirements (i.e. modified operating hours, number of observations recorded per hour, maintenance issues, etc).  <br /><br /> The recent observations data will be continuously updated and replaced with a first-in / first-out methodology, (rotating data with newest observation and moving the oldest observations to the archive storage) based on date/time stamping of the observations. The amount of data retained and available from any given station may be more than a single observation or more than 24 individual observation reports for any given station id. The number of observations is determined by the type of observation it is, i.e. NWS, etc. \n<br /><br /> For more details please visit Documentation - https://goo.gl/vycisA."
+      parameters:
+        - $ref: '#/parameters/locationPath'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/vycisA'
+  '/v1/location/{location}/observations/timeseries.json':
+    get:
+      tags:
+        - By Location
+        - Observations
+      summary: 'Time-Series Observations (Current & 24 Hours Past)'
+      description: |-
+        The Time-Series Observations returns the previous 24 hour period from the previous day up to the last reported current condition today. Current Conditions are sourced from both physical site-based observation stations and synthetic weather observations produced by the TWC Currents system. This API returns the  latest weather observation for the location supplied to include current temperatures, winds, pressure and other observed weather information. Weather observations from physical devices deployed worldwide (weather data collected from METAR, SYNOP, BUOY, CMAN devices), and the synthetic weather observations (TECCI) produced by the TWC Currents system. <br /><br /> **Current Condition & Time-Series Data**
+        Access to retained site-based and synthetic data will be distributed on-demand in Current Conditions and Time Series data feeds. Observations per station within a 24 hour period varies due to station operation requirements (i.e. modified operating hours, number of observations recorded per hour, maintenance issues, etc).  <br /><br /> The recent observations data will be continuously updated and replaced with a first-in / first-out methodology, (rotating data with newest observation and moving the oldest observations to the archive storage) based on date/time stamping of the observations. The amount of data retained and available from any given station may be more than a single observation or more than 24 individual observation reports for any given station id. The number of observations is determined by the type of observation reported i.e. NWS, etc.  <br /><br /> It is not to be assumed that data returned will be equal to the hours of past observations requested.  Example: 3 hours of past observations may not return just 3 observations. <br /><br /> Some reporting stations report observations more than once an hour. <br /><br /> For more details please visit Documentation - https://goo.gl/1RWzPl.
+      parameters:
+        - $ref: '#/parameters/locationPath'
+        - $ref: '#/parameters/unitsQuery'
+        - $ref: '#/parameters/hoursQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details:https://goo.gl/1RWzPl'
+  '/v1/location/{location}/airquality.json':
+    get:
+      tags:
+        - By Location
+        - Observations
+      summary: Air Quality - U.S.
+      description: 'The air quality data for the U.S. includes principal pollutants, pollutant indices and levels, and ozone action day phrases.  <br /><br /> For more details please visit Documentation - https://goo.gl/ANMHWX.'
+      parameters:
+        - $ref: '#/parameters/locationPath'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/ANMHWX'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/location/{location}/airquality/historical.json':
+    get:
+      tags:
+        - By Location
+        - Lifestyle
+      summary: Air Quality - U.S. Historical
+      description: 'The air quality data for the U.S. includes principal pollutants, pollutant indices and levels, and ozone action day phrases.  The Historical U.S. Air Quality Daily Summary API returns historical daily maximum values for up to 31 days per location.  <br /><br /> **Note:**The current Historical Air Quality Archive begins July 2015 <br /><br /> For more details please visit Documentation - https://goo.gl/tYO4Jx.'
+      parameters:
+        - $ref: '#/parameters/locationPath'
+        - $ref: '#/parameters/languageCodeQuery'
+        - $ref: '#/parameters/startDateQuery'
+        - $ref: '#/parameters/endDateQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/tYO4Jx'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/location/{location}/airquality/summary.json':
+    get:
+      tags:
+        - By Location
+        - Lifestyle
+      summary: Air Quality - U.S. Summary
+      description: 'The air quality data for the U.S. includes principal pollutants, pollutant indices and levels, and ozone action day phrases.  The Historical U.S. Air Quality Daily Summary API returns historical daily maximum values for up to 31 days per location.  <br /><br /> **Note:**The current Historical Air Quality Archive begins July 2015 <br /><br /> For more details please visit Documentation - https://goo.gl/AyJQ0B.'
+      parameters:
+        - $ref: '#/parameters/locationPath'
+        - $ref: '#/parameters/languageCodeQuery'
+        - $ref: '#/parameters/startDateQuery'
+        - $ref: '#/parameters/endDateQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/AyJQ0B'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/location/{location}/observations/historical.json':
+    get:
+      tags:
+        - By Location
+        - Observations
+      summary: Historical Site-Based Observations
+      description: 'Historical site-based observations are sourced from both physical site-based observation stations and synthetic weather observations produced by the TWC Currents system. This API returns the  latest weather observation for the location supplied to include current temperatures, winds, pressure and other observed weather information. Weather observations from physical devices deployed worldwide (weather data collected from METAR, SYNOP, BUOY, CMAN devices). <br /><br /> <b>Site-based Historical Observations</b><br /> Access to retained site-based and synthetic data will be distributed on-demand in historical data feeds. Past weather observations, up to one month (31 days max) of archived weather observation data for the location and date or daterange requested. <br /><br /> <b>Limitation:</b><br /> Archived observation data varies significantly by station and location. The earliest date of data recorded is from January 1931, but not all months from this time forward are available. Observations per station within a 24 hour period varies due to station operation requirements (i.e. modified operating hours, number of observations recorded per hour, maintenance issues, etc).  <br /><br /> <b>Historical Observations Data and Their Limitations</b><br /> Historical observations are “archived” and originate from METAR and SYNOP observation stations/devices. Although there is archived observation data dating back to January 1931 from some METAR stations, the available historical data is not contiguous for all months in a given year, for every year, and for all locations. Please be aware that there is a large volume of historical records that can be retrieved. However there are gaps in which a “no data found” message will be displayed for a period. When observation data is provided, it is recommended that processing rules be applied to ensure the desired ordering of the observations (oldest to newest, newest to oldest) using the observation date/time element in the feed. Reporting stations report weather observations at different intervals. Some observations are reported hourly, some every 3 hours, every 6 hours, etc. Some stations do not report during nighttime hours. <br /><br /> Please Note that minimum and maximum temperature values are often null. The National Weather Service in the U.S. did not begin to provide these elements until recent years.  <br></br> <b>Please note that Hackathon API Key is not authorized to access this endpoint, however if you are interested you can contact the IBM Booth.</b><br /><br /> For more details please visit Documentation - https://goo.gl/auOfXL.'
+      parameters:
+        - $ref: '#/parameters/locationPath'
+        - $ref: '#/parameters/startDateQuery'
+        - $ref: '#/parameters/endDateQuery'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/auOfXL'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/location/{location}/flu.json':
+    get:
+      tags:
+        - By Location
+        - Lifestyle
+      summary: U.S. Flu Outbreak
+      description: 'The Flu Outbreak API provides a color code and description of the geographic spread of influenza as assessed by state and territorial epidemiologists . Flu activity data is typically available at the end of every week during flu season (October - May) from the CDC in Atlanta, GA. Geography coverage is for United States including territories Guam (GU), Puerto Rico (PR), and Virgin Islands (VI). <br /><br /> <b>Understanding Flu Outbreak</b><br /> Implementing the Flu Outbreak data feed requires your application to perform iterative processing in order to properly ingest the weekly flu data set voluntarily reported by each state. Flu surveillance data collection is based on a reporting week that starts on Sunday and ends on Saturday of each week.  Each call returns a color/ flu activity description pair summarizing the flu activity for the prior week. <br /><br /> <b>Flu Outbreak Composition</b><br /> Summary of the Geographic Spread of Influenza (source: CDC.gov). State health departments report the estimated level of geographic spread of influenza activity in their states each week through the State and Territorial Epidemiologists Reports.  The Flu Activity element can have 1 of 5 values defined as follows for each US state/territory. <br /><br /> For more details please visit Documentation - https://goo.gl/8vYB6N.'
+      parameters:
+        - $ref: '#/parameters/locationPath'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/8vYB6N'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  '/v1/location/{location}/forecast/tides.json':
+    get:
+      tags:
+        - By Location
+        - Lifestyle
+      summary: U.S. Tides
+      description: 'The U.S. Tides API returns marine tide predictions for up to the next 30 days for +3,000 coastal locations in United States and it territories. The tidal predictions are generated from harmonic or subordinate tide station/locations. Harmonic locations (also known as reference sites) are generated by regular water level reading sites. Subordinate locations predictions are derived by applying corrections to a reference tide station. This API uses the tide station IDs posted by National Oceanic and Atmospheric Association (NOAA). <br /><br /> For more details please visit Documentation - https://goo.gl/KuhH6i.'
+      parameters:
+        - $ref: '#/parameters/locationPath'
+        - $ref: '#/parameters/startDateQuery'
+        - $ref: '#/parameters/endDateQuery'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/KuhH6i'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/achePain/daypart/15day:
+    get:
+      tags:
+        - Lifestyle
+      summary: 'Aches & Pains Index - Daypart - 15 Day'
+      description: "The Aches and Pains index indicates the weather’s influence on an individual's potential to feel aches and pains. <br /><br /> For more details please visit Documentation - https://goo.gl/PvD1Fe."
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/PvD1Fe'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/breathing/daypart/15day:
+    get:
+      tags:
+        - Lifestyle
+      summary: Breathing Index - Daypart - 15 Day
+      description: 'The Breathing index indicates weather’s influence on the ability to breath for respiratory-sensitive individuals. <br /><br /> For more details please visit Documentation - https://goo.gl/4boRly.'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/4boRly'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/degreeDays/daily/15day:
+    get:
+      tags:
+        - Lifestyle
+      summary: Degree Days Index - Daily - 15 Day
+      description: 'The Degree Days index provides the indices for cooling degree days, growing degree days, and heating degree days. <br /><br /> For more details please visit Documentation - https://goo.gl/2FPKtA.'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/2FPKtA'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/drivingDifficulty/current:
+    get:
+      tags:
+        - Lifestyle
+      summary: Driving Difficulty Index - Current Conditions
+      description: 'The Driving Difficulty index provides indices of driving difficulty, or road weather conditions. <br /><br /> For more details please visit Documentation - https://goo.gl/pnbdhL.'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/pnbdhL'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/drivingDifficulty/daypart/15day:
+    get:
+      tags:
+        - Lifestyle
+      summary: Driving Difficulty Index - Daypart - 15 Day
+      description: 'The Driving Difficulty index provides indices of driving difficulty, or road weather conditions. <br /><br /> For more details please visit Documentation - https://goo.gl/1CW2R7'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/1CW2R7'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/drivingDifficulty/hourly/360hour:
+    get:
+      tags:
+        - Lifestyle
+      summary: Driving Difficulty Index - Hourly - 15 Day
+      description: 'The Driving Difficulty index provides indices of driving difficulty, or road weather conditions. <br /><br /> For more details please visit Documentation - https://goo.gl/64lnCp'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/64lnCp'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/drySkin/daypart/15day:
+    get:
+      tags:
+        - Lifestyle
+      summary: Dry Skin Index - Daypart - 15 Day
+      description: 'The Dry Skin index provides indices indicating likelihood that a person will experience dry skin based on weather conditions. <br /><br /> For more details please visit Documentation - https://goo.gl/TU7136'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/TU7136'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/frizz/daypart/15day:
+    get:
+      tags:
+        - Lifestyle
+      summary: Frizz Index - 15 Day
+      description: 'The Frizz Index provides indices indicating likelihood that a person will experience frizzy hair based on weather conditions. <br /><br /> For more details please visit Documentation - https://goo.gl/OAbjdE'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/OAbjdE'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/frost/daypart/15day:
+    get:
+      tags:
+        - Lifestyle
+      summary: Frost Potential Index - Daypart - 15 Day
+      description: 'The Frost Potential Index provides an indices indicating likelihood of Frost. <br /><br /> For more details please visit Documentation - https://goo.gl/VJExYp'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/VJExYp'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/golf/daypart/15day:
+    get:
+      tags:
+        - Lifestyle
+      summary: Golf Index - Daypart - 15 Day
+      description: 'The Golf Index provides an indices of golfing weather conditions. <br /><br /> For more details please visit Documentation - https://goo.gl/Lg7kJY'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/Lg7kJY'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/golf/hourly/360hour:
+    get:
+      tags:
+        - Lifestyle
+      summary: Golf Index - Hourly - 15 Day
+      description: 'The Golf Index provides an indices of golfing weather conditions. <br /><br /> For more details please visit Documentation - https://goo.gl/pWnkco'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/pWnkco'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/heatCool/daypart/15day:
+    get:
+      tags:
+        - Lifestyle
+      summary: 'Heating & Cooling Index - Daypart - 15 Day'
+      description: 'The Heating and Cooling index provides indices describing the amount of heating/cooling that is required to maintain a comfortable indoor temperature, based on weather conditions. <br /><br /> For more details please visit Documentation - https://goo.gl/D2ugV6'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/D2ugV6'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/travel/daypart/15day:
+    get:
+      tags:
+        - Lifestyle
+      summary: Leisure Travel Index - Daypart - 15 Day
+      description: 'The Leisure Travel index provides indices of outdoor travel / sightseeing conditions due to weather. <br /><br /> For more details please visit Documentation - https://goo.gl/AwIptI'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/AwIptI'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/travel/hourly/360hour:
+    get:
+      tags:
+        - Lifestyle
+      summary: Leisure Travel Index - Hourly - 15 Day
+      description: 'The Leisure Travel index provides indices of outdoor travel / sightseeing conditions due to weather. <br /><br /> For more details please visit Documentation - https://goo.gl/mPjTmZ'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/mPjTmZ'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/mosquito/daily/15day:
+    get:
+      tags:
+        - Lifestyle
+      summary: Mosquito Activity Index - Daily - 15 Day
+      description: 'The Mosquito index indicates the weather’s influence on the activity of mosquitoes based on weather conditions.  <br /><br /> For more details please visit Documentation - https://goo.gl/xwcSc5'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/xwcSc5'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/pollen/daypart/15day:
+    get:
+      tags:
+        - Lifestyle
+      summary: Pollen Index - Daypart - Daypart - 15 Day
+      description: 'The Pollen index provides forecast indices for Grass, Ragweed, and Tree pollen. <br /><br /> For more details please visit Documentation - https://goo.gl/xu4oBU'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/xu4oBU'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/runWeather/daypart/15day:
+    get:
+      tags:
+        - Lifestyle
+      summary: Running Weather Index - Daypart - 15 Day
+      description: 'The Running Weather Index provides indices of outdoor running conditions due to weather - for short, and long runs. <br /><br /> For more details please visit Documentation - https://goo.gl/0vP6q9'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/0vP6q9'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/runWeather/hourly/360hour:
+    get:
+      tags:
+        - Lifestyle
+      summary: Running Weather Index - Hourly - 15 Day
+      description: 'The Running Weather Index provides indices of outdoor running conditions due to weather - for short, and long runs. <br /><br /> For more details please visit Documentation - https://goo.gl/krP8FV'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/krP8FV'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/ski/daypart/15day:
+    get:
+      tags:
+        - Lifestyle
+      summary: Ski Index - Daypart - 15 Day
+      description: 'The Ski Index provides indices of ski conditions due to weather. <br /><br /> For more details please visit Documentation - https://goo.gl/LnAqFI'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/LnAqFI'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/static/daypart/15day:
+    get:
+      tags:
+        - Lifestyle
+      summary: Static Index - Daypart - 15 Day
+      description: 'The Static Electricity Index provides indices indicating the potential for static electricity based on weather conditions. <br /><br /> For more details please visit Documentation - https://goo.gl/Sw4WP3'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/Sw4WP3'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/uv/current:
+    get:
+      tags:
+        - Lifestyle
+      summary: UV Index - Current Conditions
+      description: 'The UV Index provides indices of the intensity of the solar radiation level and risk of skin damage due to exposure. <br /><br /> For more details please visit Documentation - https://goo.gl/7hJ0Q3'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/7hJ0Q3'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/uv/daypart/15day:
+    get:
+      tags:
+        - Lifestyle
+      summary: UV Index - Daypart - 15 Day
+      description: 'The UV Index provides indices of the intensity of the solar radiation level and risk of skin damage due to exposure. <br /><br /> For more details please visit Documentation - https://goo.gl/8kVQWX'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/8kVQWX'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/uv/hourly/360hour:
+    get:
+      tags:
+        - Lifestyle
+      summary: UV Index - Hourly - 15 Day
+      description: 'The UV Index provides indices of the intensity of the solar radiation level and risk of skin damage due to exposure. <br /><br /> For more details please visit Documentation - https://goo.gl/xXE969'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/xXE969'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/wateringNeeds/daypart/15day:
+    get:
+      tags:
+        - Lifestyle
+      summary: Watering Needs Index - Daypart - 15 Day
+      description: 'The Watering Needs  index indicates the weather’s influence on the need to water your lawn or garden. <br /><br /> For more details please visit Documentation - https://goo.gl/He2ymz'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/He2ymz'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/indices/powerDisruption/daypart/15day:
+    get:
+      tags:
+        - Lifestyle
+      summary: Power Disruption Index - Daypart - 15 Day
+      description: 'The Power Disruption index provides indices indicating the potential for power disruptions due to weather.  <br></br> <b>Please note that Hackathon API Key is not authorized to access this endpoint, however if you are interested you can contact the IBM Booth.</b> <br /><br /> For more details please visit Documentation - https://goo.gl/tv4B3f'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/formatQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/tv4B3f'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v2/stormreports:
+    get:
+      tags:
+        - Alerts
+      summary: Local Storm Reports
+      description: 'The Local Storm Report API provides short text reports of observed severe weather such as wind or hail damage, snow depth that is parsed from NWS Local Storm Report (LSR) and Public Information Statement (PNS) bulletins. The reports are ranked and prioritized by TWC upon receipt from the NWS.  <br /><br /> Within the metadata section of the response there is a field named ‘next_batch’; if next_batch equals null the user has received all the data and is done. If next_batch is not null the user will make an additional call - the ‘next’ parameter will be set equal to the value found in ‘next_batch’. Keep calling the API until next_batch equals null.  <br></br> <b>Please note that Hackathon API Key is not authorized to access this endpoint, however if you are interested you can contact the IBM Booth.</b> <br /><br /> For more details please visit Documentation - https://goo.gl/uLpaOj'
+      parameters:
+        - $ref: '#/parameters/geoidQuery'
+        - $ref: '#/parameters/nextQuery'
+        - $ref: '#/parameters/formatQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/uLpaOj'
+        '401':
+          description: Unauthorized. Please enter API key using the Authorize Button.
+  /v3/location/search:
+    get:
+      tags:
+        - Utility
+      summary: Location Search
+      description: 'The Location Service API provides the ability to lookup a location name or geocode (latitude and longitude) to retrieve a set of locations matching the request. The Location Service supports search by; City Name, Address, Geocode (Latitude and Longitude), Postal Code, IATA Code, ICAO Code. <br /><br /> For more details please visit Documentation - https://goo.gl/l18rri.'
+      parameters:
+        - $ref: '#/parameters/queryQuery'
+        - $ref: '#/parameters/locationTypeQuery'
+        - $ref: '#/parameters/adminDistrictQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+        - $ref: '#/parameters/formatQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/l18rri'
+  /v3/location/point:
+    get:
+      tags:
+        - Utility
+      summary: Location Search
+      description: 'The Location Service API provides the ability to lookup a location name or geocode (latitude and longitude) to retrieve a set of locations matching the request. The Location Service supports search by; City Name, Address, Geocode (Latitude and Longitude), Postal Code, IATA Code, ICAO Code. <br /><br /> For more details please visit Documentation - https://goo.gl/l18rri.'
+      parameters:
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/postalCodeQuery'
+        - $ref: '#/parameters/iataCodeQuery'
+        - $ref: '#/parameters/icaoCodeQuery'
+        - $ref: '#/parameters/languageCodeQuery'
+        - $ref: '#/parameters/formatQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/l18rri'
+  /v3/TileServer/series/productSet/PPAcore:
+    get:
+      tags:
+        - Weather Imagery
+      summary: Inventory Series List
+      description: 'The Image Tile Server API features a comprehensive set of tile-based products utilizing data from including radar, satellite, current conditions, and forecast information based on complex algorithms developed from TWC observation systems. It provides the ability to request tiles of varying resolution. The Image Tile Server product provides access to our most popular mapping layers pre-rendered with appropriate palettes, ready to be applied to your base map. Layers are served as precut 256x256 png image files for interactive maps and other data visualization, addressed according to a XYZ tile address schema.                      <br /><br /> For more details please visit Documentation - https://goo.gl/LXP7HM.'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/LXP7HM'
+  '/v3/TileServer/tile/{layer}':
+    get:
+      tags:
+        - Weather Imagery
+      summary: Inventory Series List
+      description: 'The Image Tile Server API features a comprehensive set of tile-based products utilizing data from including radar, satellite, current conditions, and forecast information based on complex algorithms developed from TWC observation systems. It provides the ability to request tiles of varying resolution. The Image Tile Server product provides access to our most popular mapping layers pre-rendered with appropriate palettes, ready to be applied to your base map. Layers are served as precut 256x256 png image files for interactive maps and other data visualization, addressed according to a XYZ tile address schema.                      <br /><br /> For more details please visit Documentation - https://goo.gl/LXP7HM.'
+      parameters:
+        - $ref: '#/parameters/layerPath'
+        - $ref: '#/parameters/tsQuery'
+        - $ref: '#/parameters/ftsQuery'
+        - $ref: '#/parameters/xyzQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details: https://goo.gl/LXP7HM'
+  /v3/wx/hod/reanalysis/historical/point:
+    get:
+      tags:
+        - Observations
+      summary: History on Demand - Reanalysis
+      description: |-
+        History on Demand (HOD) contains a broad set of worldwide, hourly, historical weather data. It provides a consistent data set of the most important and commonly used weather parameters, including surface temperature, wind speed, atmospheric pressure, and precipitation rate. Accessible through a web API, this service synthesizes multiple historic observational data sets to create a worldwide, high-resolution, gridded representation of past weather conditions.  <br /><br /> <b>Weather Data Currently hosted by History on Demand</b> Currently, HOD provides raw and derived weather characteristics, based on a worldwide climate forecast reanalysis grid with roughly 25 km2 point density. The “reanalysis” grid contains historical, hourly values (from April 2011 to 31 days prior to the current date) for: <ul>
+          <li>Surface temperature</li>
+          <li>Surface atmospheric pressure</li>
+          <li>Relative humidity</li>
+          <li>Dew point</li>
+          <li>Wind speed</li>
+          <li>Wind direction</li>
+          <li>Precipitation rate</li>
+        </ul> <br /><br /> For more details please visit Documentation - https://goo.gl/b44JFF.
+      parameters:
+        - $ref: '#/parameters/pointTypeQuery'
+        - $ref: '#/parameters/geocodeQuery'
+        - $ref: '#/parameters/distanceQuery'
+        - $ref: '#/parameters/startDateTimeQuery'
+        - $ref: '#/parameters/endDateTimeQuery'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details - https://goo.gl/b44JFF'
+  /v3/wx/hod/reanalysis/historical/boundary:
+    get:
+      tags:
+        - Observations
+      summary: History on Demand - Reanalysis
+      description: |-
+        History on Demand (HOD) contains a broad set of worldwide, hourly, historical weather data. It provides a consistent data set of the most important and commonly used weather parameters, including surface temperature, wind speed, atmospheric pressure, and precipitation rate. Accessible through a web API, this service synthesizes multiple historic observational data sets to create a worldwide, high-resolution, gridded representation of past weather conditions.  <br /><br /> <b>Weather Data Currently hosted by History on Demand</b> Currently, HOD provides raw and derived weather characteristics, based on a worldwide climate forecast reanalysis grid with roughly 25 km2 point density. The “reanalysis” grid contains historical, hourly values (from April 2011 to 31 days prior to the current date) for: <ul>
+          <li>Surface temperature</li>
+          <li>Surface atmospheric pressure</li>
+          <li>Relative humidity</li>
+          <li>Dew point</li>
+          <li>Wind speed</li>
+          <li>Wind direction</li>
+          <li>Precipitation rate</li>
+        </ul> <br /><br /> For more details please visit Documentation - https://goo.gl/b44JFF.
+      parameters:
+        - $ref: '#/parameters/boundaryTypeQuery'
+        - $ref: '#/parameters/bboxQuery'
+        - $ref: '#/parameters/verticesQuery'
+        - $ref: '#/parameters/startDateTimeQuery'
+        - $ref: '#/parameters/endDateTimeQuery'
+        - $ref: '#/parameters/unitsQuery'
+      responses:
+        '200':
+          description: 'Please see documentation for details - https://goo.gl/b44JFF'
+parameters:
+  adminDistrictQuery:
+    name: adminDistrictCode
+    default: GA
+    in: query
+    description: The admin district of the location
+    type: string
+    required: false
+  apiKeyQuery:
+    name: apiKey
+    default: 626505b9091f4982a505b9091f798235
+    in: query
+    description: 'The API Key, only valid for HackZurich'
+    type: string
+    required: true
+  bboxQuery:
+    name: bbox
+    in: query
+    description: '-> Relevant to bbox query only, this parameter specifies the standard corners of a bounding box within which all data should be included in the result.  The pair is specifies the SE corner 1st and NW 2nd, separated by a semicolon. (e.g. 10.1,33.3;10.2,33.1)'
+    type: string
+    required: false
+  boundaryTypeQuery:
+    name: boundaryType
+    default: bbox
+    in: query
+    description: Which type of boundary query is desired.
+    type: string
+    required: true
+    enum:
+      - bbox
+      - polygon
+  countryCode:
+    name: countryCode
+    in: path
+    description: 'A valid country code; Please keep in mind that not every country code is covered by all APIs. <br /><br />'
+    type: string
+    enum:
+      - US
+      - CH
+      - DE
+      - GB
+      - '----'
+      - AT
+      - BE
+      - BA
+      - BG
+      - CA
+      - HR
+      - CY
+      - CZ
+      - DK
+      - EE
+      - FI
+      - FR
+      - GR
+      - HU
+      - IS
+      - IE
+      - IT
+      - LV
+      - LT
+      - LU
+      - MK
+      - MT
+      - MD
+      - ME
+      - NL
+      - 'NO'
+      - PL
+      - PT
+      - RO
+      - RS
+      - SK
+      - SI
+      - ES
+      - SE
+    required: true
+  daysPath:
+    name: days
+    description: Number of days
+    in: path
+    required: true
+    type: string
+    default: 3
+    enum:
+      - 3
+      - 5
+      - 7
+      - 10
+      - 15
+  distanceQuery:
+    name: 'distance,'
+    description: '-> Relevant to pointType=radius query. Specifies proximity to the geocode within which data should be included in the result. Specified as numeric, integral value, interpreted as a kilometer (km) value, and currently limited to 25km.'
+    in: query
+    type: integer
+  endDateQuery:
+    name: endDate
+    description: The end date in the format YYYYMMDD
+    in: query
+    type: string
+    default: 20161020
+    required: true
+  endDateTimeQuery:
+    name: endDateTime
+    description: '-> The end of the analysis period, specified in format “YYYYMMDDHHmm”. Must be after startDateTime.'
+    in: query
+    type: string
+    required: true
+  endQuery:
+    name: end
+    description: End TODO
+    in: query
+    type: integer
+    default: '0331'
+    required: true
+  endMonthQuery:
+    name: end
+    description: 'The end month [1-12].'
+    in: query
+    type: integer
+    required: true
+    default: 3
+  formatQuery:
+    name: format
+    in: query
+    type: string
+    default: json
+    required: true
+    enum:
+      - json
+  ftsQuery:
+    name: fts
+    description: 'Forecast Time Slice (fts) is an Epoch formatted time stamp. The example (fts) equates to: GMT: Tue, 21 Jul 2015 02:00:00 GMT'
+    in: query
+    default: 1428949000
+    type: string
+  geocodeQuery:
+    name: geocode
+    default: '33.74,-84.39'
+    description: 'The geocode in the format {latitude},{longitude}'
+    in: query
+    type: string
+    required: false
+  geoidQuery:
+    name: geoId
+    description: 'A valid GeoId, e.g. GAC121'
+    in: query
+    type: string
+    required: false
+  hoursQuery:
+    name: hours
+    description: Number of hours
+    in: query
+    type: integer
+    required: true
+    default: 1
+  iataCodeQuery:
+    name: iataCode
+    in: query
+    type: string
+    description: Search by IATA Code
+    required: false
+  icaoCodeQuery:
+    name: icaoCode
+    in: query
+    type: string
+    description: Search by icao Code
+    required: false
+  latitudePath:
+    name: latitude
+    in: path
+    type: number
+    format: float
+    description: The latitude of a geolocation
+    default: '34.063'
+    required: true
+  longitudePath:
+    name: longitude
+    in: path
+    type: number
+    format: float
+    default: '-83.217'
+    description: The longitude of a geolocation
+    required: true
+  languageCodeQuery:
+    name: language
+    in: query
+    type: string
+    description: 'A valid language code <br /><br />'
+    required: true
+    default: en-US
+    enum:
+      - en-US
+      - en-GB
+      - de-AT
+  layerPath:
+    name: layer
+    in: path
+    type: string
+    description: The current condition or forecast layer to be requested
+    required: true
+    enum:
+      - dewpoint
+      - feelsLike
+      - precip24hr
+      - rwi
+      - satrad
+      - snow24hr
+      - temp
+      - tempChange
+      - uv
+      - windSpeed
+      - radar
+      - radarAustralian
+      - cloudsFcst
+      - dewpointFcst
+      - feelsLikeFcst
+      - precip24hrFcst
+      - radarFcst
+      - satradFcst
+      - snow24hrFcst
+      - tempFcst
+      - uvFcst
+      - windSpeedFcst
+  locationTypeQuery:
+    name: locationType
+    in: query
+    type: string
+    description: The type of the searched location
+    default: city
+    enum:
+      - city
+      - address
+  nextQuery:
+    name: next
+    in: query
+    type: string
+    description: The next batch id
+  locationPath:
+    name: location
+    in: path
+    type: string
+    default: '30339:4:US'
+    description: 'The Postal Code has a TWC proprietary location type (4) with the following format: location/<postal code>:<location type>:<country code>'
+    required: true
+  pointTypeQuery:
+    name: pointType
+    in: query
+    type: string
+    description: Which type of point query is desired.
+    required: true
+    enum:
+      - radius
+      - nearest
+      - weighted
+  postalCodeQuery:
+    name: postalKey
+    in: query
+    type: string
+    description: 'Search by Postal Code - Postal Key is a composite of <Postal Code>:<Country Code>'
+    required: false
+  queryQuery:
+    name: query
+    description: Search Query
+    in: query
+    type: string
+    default: Atlanta
+    required: true
+  startQuery:
+    name: start
+    description: Start time
+    in: query
+    type: integer
+    default: '0101'
+    required: true
+  startDateQuery:
+    name: startDate
+    description: The start date in the format YYYYMMDD
+    in: query
+    type: string
+    default: 20161001
+    required: true
+  startDateTimeQuery:
+    name: startDateTime
+    description: '-> The start of the analysis period, specified in format “YYYYMMDDHHmm”. Must be before endDateTime.'
+    in: query
+    type: string
+    required: true
+  startMonthQuery:
+    name: start
+    description: 'The start month [1-12].'
+    in: query
+    type: integer
+    required: true
+    default: 1
+  tsQuery:
+    name: ts
+    description: 'The time slice (ts) is an Epoch formatted time stamp. The example (ts) equates to: GMT: Mon, 20 Jul 2015 20:30:00 GMT'
+    in: query
+    default: 1437426000
+    type: string
+  unitsQuery:
+    name: units
+    in: query
+    type: string
+    default: e
+    description: |-
+      The unit of measure for the response. The following values are supported:
+      <ul>
+        <li>e = English units</li>
+        <li>m = Metric units</li>
+        <li>h = Hybrid units (UK)</li>
+        <li>s  = Metric SI units </li>
+      </ul>
+    enum:
+      - e
+      - m
+      - h
+      - s
+  verticesQuery:
+    name: vertices
+    in: query
+    description: '-> Relevant to polygon query. The vertices parameter is a semi-colon-delimited list of comma-delimited lat/lon pairs that depict a polygon within which all data should be included in the result.'
+    type: string
+    required: false
+  xyzQuery:
+    name: xyz
+    in: query
+    type: string
+    default: '0:0:1'
+    description: 'The xyz is the tile address scheme. Each tile is given an X and Y coordinate ranging from (0) in the upper left to (2zoom  -1, 2zoom  -1) in the lower right of a Mercator Projected map. <ul> <li> x ranges from 0 (left edge is 180°W) to 2zoom  -1 (right edge is 180°E) with TileX = floor(mapPixelX / 256) </li> <li> y ranges from 0 (top edge is 85.0511°N) to 2zoom  -1 (bottom edge is 85.0511°S) with TileY = floor(mapPixelY/256) </li> <li> z is the zoom level defined for the image </li> </ul>'
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'
+x-ibm-configuration:
+  enforced: true
+  testable: true
+  phase: realized
+  cors:
+    enabled: true
+  assembly:
+    execute:
+      - invoke:
+          title: Call Weather API
+          timeout: 60
+          verb: keep
+          cache-response: protocol
+          cache-ttl: 900
+          stop-on-error:
+            - null
+          version: 1.0.0
+          target-url: 'https://api.weather.com$(api.operation.path)?apiKey=626505b9091f4982a505b9091f798235&$(request.querystring)'
+    catch: []
+consumes:
+  - application/json
+
